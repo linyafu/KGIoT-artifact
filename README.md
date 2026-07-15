@@ -1,7 +1,6 @@
 # Home TAP Benchmark (Anonymous Artifact)
 
 > Anonymous benchmark artifact for double-blind review.
-> **Public link for reviewers:** create a mirror at [anonymous.4open.science](https://anonymous.4open.science/) from the private GitHub repository, then cite that URL in the rebuttal (not the GitHub URL).
 
 This repository contains the complete evaluation benchmark for natural-language smart-home **Trigger-Action Program (TAP)** generation used in the accompanying paper. The benchmark has **60 requests** across three simulated homes (`home_L`, `home_M`, `home_S`), with executable ground truth, explicit/implicit constraint annotations, scoring scripts, and construction documentation.
 
@@ -120,10 +119,6 @@ A full schema example is in `docs/ANNOTATION_GUIDELINES.md`.
 ## Knowledge-Parity (+DK) Baselines
 
 For fair comparison on constraint-aware requests, baselines may be evaluated with the plain-text domain rules in `domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt` injected into their prompts. This provides template-level operational guidance without giving per-request oracle answers or a knowledge graph.
-
-## Citation
-
-If you use this benchmark, please cite the accompanying paper (see `CITATION.bib`).
 
 ## License
 
