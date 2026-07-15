@@ -17,7 +17,7 @@ from benchmark_utils import (
     load_json,
     parse_tap_from_text,
     read_jsonl,
-    structural_validity,
+    platform_validity,
     write_jsonl,
 )
 
@@ -279,7 +279,7 @@ def score_one(
             tap_source = "ha_metrics"
             parse_error = "response text did not contain TAP; recovered generated TAP from HA metrics"
     home_env = load_home_environment(str(raw.get("home_id") or (gt_row or {}).get("home_id") or ""))
-    validity = structural_validity(
+    validity = platform_validity(
         parsed_tap,
         home_env=home_env,
         response_text=response_text,
@@ -304,7 +304,7 @@ def score_one(
         "parse_error": parse_error,
         "tap_source": tap_source if parsed_tap is not None else "",
         "parsed_tap": parsed_tap,
-        "structural_validity": validity,
+        "platform_validity": validity,
         "ha_metrics": extract_ha_metrics(ha_metrics),
         "raw_error": raw.get("error", ""),
     }
@@ -347,7 +347,7 @@ def score_one(
             "implicit_constraints": implicit,
             "executable_correctness": {
                 "score": executable_correctness,
-                "structural_validity_score": validity.get("score"),
+                "platform_validity_score": validity.get("score"),
                 "explicit_intent_score": explicit.get("score"),
                 "implicit_constraint_score": implicit.get("score"),
             },

@@ -89,23 +89,19 @@ The primary value is `implicit_constraints.completion`, the recall over all anno
 
 `executable_correctness` is the original exact-match metric over the full `tap` target. Trigger, condition, and action atom sets must each match an accepted executable TAP candidate.
 
-### Structural Validity
+### Platform Validity
 
-`structural_validity.score = 1` when the generated TAP is a dictionary with string `trigger`, `condition`, and `action` fields; every non-time atom references a real device and capability in the target home; each atom uses a capability whose `TAP_role` permits that field; and the TAP is successfully deployed to Home Assistant. Hallucinated devices/capabilities, illegal role usage, or deploy failures are scored as 0.
+`platform_validity.score = 1` when the generated TAP is a dictionary with string `trigger`, `condition`, and `action` fields; every non-time atom references a real device and capability in the target home; each atom uses a capability whose `TAP_role` permits that field; and the TAP is successfully deployed to Home Assistant. Hallucinated devices/capabilities, illegal role usage, or deploy failures are scored as 0.
 
 ### Grounding Precision and Recall
 
 Device-level and capability-level precision/recall are computed from the system's retrieved or selected context against the benchmark ground truth. If the system attempts a request but fails before producing a grounding result, the corresponding device/capability precision and recall are scored as 0 rather than being omitted from the aggregate.
-
-### Rule Completeness
-
-`rule_completeness.score = 1` when explicit intent is satisfied and all applicable implicit constraints are completed. It is intended as an interpretable bridge between explicit-intent score and executable correctness.
 
 ## Reporting
 
 Report two orthogonal breakdowns:
 
 - By request category: `Basic TAP`, `Conditional TAP`, `Multi-Action TAP`, `Constraint-Aware TAP`.
-- By scoring target: explicit-intent, implicit-constraint completion, executable correctness, structural validity, and rule completeness.
+- By scoring target: explicit-intent score, implicit-constraint completion, executable correctness, platform validity, and grounding precision/recall when applicable.
 
 For non-constraint-aware rows with no annotated implicit atoms, implicit-constraint completion should be treated as not applicable rather than as a perfect score in the main aggregate.

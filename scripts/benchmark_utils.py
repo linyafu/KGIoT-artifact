@@ -157,7 +157,7 @@ def _semantic_atom(atom: str, field: str) -> str:
         return atom
 
     # Treat a single equality sign in trigger/condition as semantically equivalent
-    # to equality, while structural_validity still reports it as invalid. Do not
+    # to equality, while platform_validity still reports it as invalid. Do not
     # do this for actions, where single '=' is the valid assignment operator.
     if field in {"trigger", "condition"} and "=" in atom and not any(
         op in atom for op in ["==", ">=", "<="]
@@ -605,7 +605,7 @@ def deploy_succeeded(
     return True
 
 
-def structural_validity(
+def platform_validity(
     pred_tap: Optional[Dict[str, Any]],
     *,
     home_env: Optional[HomeEnvironment] = None,

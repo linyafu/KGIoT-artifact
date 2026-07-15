@@ -46,10 +46,10 @@ Each home has 20 requests with a fixed distribution:
 The evaluator reports separate metrics to disentangle user-intent satisfaction from constraint knowledge:
 
 - **Explicit-intent score**: match atoms stated in the user request (`explicit_tap`).
-- **Implicit-constraint completion**: recall over annotated dependencies/interlocks.
+- **Implicit-constraint completion**: recall over annotated dependencies/interlocks (primarily aggregated over `Constraint-Aware TAP`).
 - **Executable correctness**: exact match against the full executable `tap`.
-- **Structural validity**: well-formed TAP referencing real home devices/capabilities.
-- **Rule completeness**: explicit intent satisfied + all applicable implicit constraints completed.
+- **Platform validity**: well-formed TAP referencing real home devices/capabilities and deployable on the target platform.
+- **Grounding precision/recall** (optional): device- and capability-level precision/recall when a method exposes retrieved context.
 
 See `docs/ANNOTATION_GUIDELINES.md` for full scoring rules.
 

@@ -48,6 +48,16 @@ def has_grounding_step(method: str) -> bool:
     return True
 
 
+def platform_validity_block(row: Dict[str, Any]) -> Dict[str, Any]:
+    block = row.get("platform_validity") or row.get("structural_validity")
+    return block if isinstance(block, dict) else {}
+
+
+def platform_validity_score(row: Dict[str, Any]) -> Optional[float]:
+    score = platform_validity_block(row).get("score")
+    return float(score) if score is not None else None
+
+
 def metric_values(rows: List[Dict[str, Any]], *, include_grounding: bool = True) -> Dict[str, Optional[float]]:
     executable = [
         row.get("executable_correctness", {}).get("score")
@@ -65,16 +75,12 @@ def metric_values(rows: List[Dict[str, Any]], *, include_grounding: bool = True)
         if isinstance(row.get("implicit_constraints"), dict)
         and row.get("implicit_constraints", {}).get("completion") is not None
     ]
-    structural = [
-        row.get("structural_validity", {}).get("score")
-        for row in rows
-        if isinstance(row.get("structural_validity"), dict)
-    ]
+    platform = [platform_validity_score(row) for row in rows]
     ha_metrics = [row.get("ha_metrics") for row in rows if isinstance(row.get("ha_metrics"), dict)]
     out = {
         "n": len(rows),
         "executable_correctness": mean(executable),
-        "structural_validity": mean(structural),
+        "platform_validity": mean(platform),
         "explicit_intent_score": mean(explicit),
         "implicit_constraint_completion": mean(implicit),
         "avg_e2e_latency_ms": mean([row.get("elapsed_ms") for row in rows]),
@@ -119,8 +125,8 @@ def write_csv(path: Path, rows: List[Dict[str, Any]], fields: List[str]) -> None
 def failure_reason(row: Dict[str, Any]) -> str:
     if row.get("parse_error"):
         return "parse_error"
-    if isinstance(row.get("structural_validity"), dict) and row["structural_validity"].get("score") == 0:
-        return "structural_invalid"
+    if platform_validity_block(row).get("score") == 0:
+        return "platform_invalid"
     if isinstance(row.get("explicit_intent"), dict) and row["explicit_intent"].get("score") == 0:
         return "explicit_intent_failed"
     if (
@@ -177,9 +183,9 @@ def write_failures(path: Path, all_rows: Dict[str, List[Dict[str, Any]]]) -> Non
                 lines.append(f"  Parse error: {parse_error}")
             lines.extend(_format_tap_for_markdown(row.get("parsed_tap")))
 
-            structural = row.get("structural_validity", {})
-            if isinstance(structural, dict) and structural.get("errors"):
-                lines.append(f"  Structural errors: {structural.get('errors')}")
+            platform = platform_validity_block(row)
+            if platform.get("errors"):
+                lines.append(f"  Platform errors: {platform.get('errors')}")
 
             explicit = row.get("explicit_intent", {})
             details = explicit.get("details", {}) if isinstance(explicit, dict) else {}
@@ -234,9 +240,7 @@ def main() -> int:
                     "executable_correctness": row.get("executable_correctness", {}).get("score")
                     if isinstance(row.get("executable_correctness"), dict)
                     else None,
-                    "structural_validity": row.get("structural_validity", {}).get("score")
-                    if isinstance(row.get("structural_validity"), dict)
-                    else None,
+                    "platform_validity": platform_validity_score(row),
                     "explicit_intent_score": row.get("explicit_intent", {}).get("score")
                     if isinstance(row.get("explicit_intent"), dict)
                     else None,
@@ -294,7 +298,7 @@ def main() -> int:
         "score_file",
         "n",
         "executable_correctness",
-        "structural_validity",
+        "platform_validity",
         "explicit_intent_score",
         "implicit_constraint_completion",
         "avg_e2e_latency_ms",
@@ -310,7 +314,7 @@ def main() -> int:
         "category",
         "request",
         "executable_correctness",
-        "structural_validity",
+        "platform_validity",
         "explicit_intent_score",
         "implicit_constraint_completion",
         "e2e_latency_ms",
