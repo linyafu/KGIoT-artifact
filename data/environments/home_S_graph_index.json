@@ -1,0 +1,1667 @@
+{
+  "area_index": {
+    "living_room": [
+      1,
+      5,
+      9
+    ],
+    "bedroom": [
+      2,
+      4,
+      7
+    ],
+    "bathroom": [
+      3,
+      8
+    ],
+    "entrance": [
+      6,
+      10
+    ]
+  },
+  "device_index": {
+    "1": {
+      "id": 1,
+      "name": "living_room_illumination_sensor",
+      "type": "illumination_sensor",
+      "area": "living_room",
+      "entities": [
+        "button.lumi_mgl01_0399_info"
+      ],
+      "cap_constraints": {},
+      "services": {
+        "illumination_sensor": {
+          "illumination": {
+            "description": "Illumination",
+            "format": "float",
+            "access": [
+              "read",
+              "notify"
+            ],
+            "unit": "lux",
+            "value-range": [
+              0,
+              83000,
+              1
+            ],
+            "type": "state"
+          }
+        },
+        "battery": {
+          "battery_level": {
+            "description": "Battery Level (Note: 1=Normal, 2=Low)",
+            "format": "uint8",
+            "access": [
+              "read",
+              "notify"
+            ],
+            "unit": "none",
+            "value-list": [
+              {
+                "value": 1,
+                "description": "Normal"
+              },
+              {
+                "value": 2,
+                "description": "Low"
+              }
+            ],
+            "type": "state",
+            "value_semantics": {
+              "1": "Normal",
+              "2": "Low"
+            }
+          }
+        }
+      }
+    },
+    "2": {
+      "id": 2,
+      "name": "bedroom_aircondition",
+      "type": "air_conditioner",
+      "area": "bedroom",
+      "entities": [
+        "button.xiaomi_mc2_8cbf_info"
+      ],
+      "cap_constraints": {
+        "air_conditioner.mode": {
+          "depends_on": [
+            "air_conditioner.on"
+          ]
+        },
+        "air_conditioner.target_temperature": {
+          "depends_on": [
+            "air_conditioner.on"
+          ]
+        }
+      },
+      "services": {
+        "air_conditioner": {
+          "on": {
+            "description": "Switch Status",
+            "format": "bool",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "type": "state"
+          },
+          "mode": {
+            "description": "Mode (Note: 2=Cool, 3=Dry, 4=Fan, 5=Heat)",
+            "format": "uint8",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "value-list": [
+              {
+                "value": 2,
+                "description": "Cool"
+              },
+              {
+                "value": 3,
+                "description": "Dry"
+              },
+              {
+                "value": 4,
+                "description": "Fan"
+              },
+              {
+                "value": 5,
+                "description": "Heat"
+              }
+            ],
+            "gatt-access": [],
+            "type": "state",
+            "value_semantics": {
+              "2": "Cool",
+              "3": "Dry",
+              "4": "Fan",
+              "5": "Heat"
+            }
+          },
+          "target_temperature": {
+            "description": "Target Temperature",
+            "format": "float",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "unit": "celsius",
+            "value-range": [
+              16,
+              31,
+              0.5
+            ],
+            "type": "state"
+          },
+          "eco": {
+            "description": "ECO",
+            "format": "bool",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "type": "state"
+          },
+          "heater": {
+            "description": "Heater",
+            "format": "bool",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "type": "state"
+          },
+          "dryer": {
+            "description": "Dryer",
+            "format": "bool",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "type": "state"
+          },
+          "sleep_mode": {
+            "description": "Sleep Mode",
+            "format": "bool",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "type": "state"
+          }
+        },
+        "fan_control": {
+          "fan_level": {
+            "description": "Fan Level (Note: 0=Auto, 1=Level1, 2=Level2, 3=Level3, 4=Level4, 5=Level5, 6=Level6, 7=Level7)",
+            "format": "uint8",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "value-list": [
+              {
+                "value": 0,
+                "description": "Auto"
+              },
+              {
+                "value": 1,
+                "description": "Level1"
+              },
+              {
+                "value": 2,
+                "description": "Level2"
+              },
+              {
+                "value": 3,
+                "description": "Level3"
+              },
+              {
+                "value": 4,
+                "description": "Level4"
+              },
+              {
+                "value": 5,
+                "description": "Level5"
+              },
+              {
+                "value": 6,
+                "description": "Level6"
+              },
+              {
+                "value": 7,
+                "description": "Level7"
+              }
+            ],
+            "type": "state",
+            "value_semantics": {
+              "0": "Auto",
+              "1": "Level1",
+              "2": "Level2",
+              "3": "Level3",
+              "4": "Level4",
+              "5": "Level5",
+              "6": "Level6",
+              "7": "Level7"
+            }
+          },
+          "vertical_swing": {
+            "description": "Vertical Swing",
+            "format": "bool",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "type": "state"
+          }
+        },
+        "environment": {
+          "temperature": {
+            "description": "Temperature",
+            "format": "float",
+            "access": [
+              "read",
+              "notify"
+            ],
+            "unit": "celsius",
+            "value-range": [
+              -30,
+              100,
+              0.1
+            ],
+            "type": "state"
+          }
+        },
+        "alarm": {
+          "alarm": {
+            "description": "Alarm",
+            "format": "bool",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "type": "state"
+          }
+        },
+        "indicator_light": {
+          "on": {
+            "description": "Switch Status",
+            "format": "bool",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "type": "state"
+          }
+        },
+        "electricity": {
+          "electricity": {
+            "description": "耗电量",
+            "format": "float",
+            "access": [
+              "read",
+              "notify"
+            ],
+            "value-range": [
+              0,
+              999999.999999,
+              1e-06
+            ],
+            "type": "state"
+          },
+          "elec_count": {
+            "description": "",
+            "format": "uint16",
+            "access": [
+              "read",
+              "notify"
+            ],
+            "value-range": [
+              0,
+              65535,
+              1
+            ],
+            "type": "state"
+          }
+        },
+        "maintenance": {
+          "clean": {
+            "description": "",
+            "format": "string",
+            "access": [
+              "read",
+              "notify",
+              "write"
+            ],
+            "type": "state"
+          },
+          "examine": {
+            "description": "",
+            "format": "string",
+            "access": [
+              "read",
+              "notify",
+              "write"
+            ],
+            "type": "state"
+          },
+          "error": {
+            "description": "",
+            "format": "event",
+            "access": [
+              "notify"
+            ],
+            "type": "event",
+            "arguments": [
+              3
+            ]
+          },
+          "running_duration": {
+            "description": "",
+            "format": "event",
+            "access": [
+              "notify"
+            ],
+            "type": "event",
+            "arguments": [
+              5
+            ]
+          },
+          "filtertest": {
+            "description": "",
+            "format": "event",
+            "access": [
+              "notify"
+            ],
+            "type": "event",
+            "arguments": []
+          },
+          "examine_result": {
+            "description": "",
+            "format": "event",
+            "access": [
+              "notify"
+            ],
+            "type": "event",
+            "arguments": [
+              2
+            ]
+          },
+          "clean_result": {
+            "description": "",
+            "format": "event",
+            "access": [
+              "notify"
+            ],
+            "type": "event",
+            "arguments": [
+              1
+            ]
+          },
+          "button_pressed": {
+            "description": "",
+            "format": "event",
+            "access": [
+              "notify"
+            ],
+            "type": "event",
+            "arguments": []
+          },
+          "button_released": {
+            "description": "",
+            "format": "event",
+            "access": [
+              "notify"
+            ],
+            "type": "event",
+            "arguments": []
+          }
+        },
+        "enhance": {
+          "fan_percent": {
+            "description": "",
+            "format": "uint8",
+            "access": [
+              "read",
+              "notify",
+              "write"
+            ],
+            "value-range": [
+              1,
+              101,
+              1
+            ],
+            "type": "state"
+          },
+          "timer": {
+            "description": "",
+            "format": "string",
+            "access": [
+              "read",
+              "notify",
+              "write"
+            ],
+            "type": "state"
+          }
+        }
+      }
+    },
+    "3": {
+      "id": 3,
+      "name": "bathroom_light",
+      "type": "light",
+      "area": "bathroom",
+      "entities": [
+        "button.ymj_wyymj1_f049_info"
+      ],
+      "cap_constraints": {
+        "light.brightness": {
+          "depends_on": [
+            "light.on"
+          ]
+        },
+        "light.color_temperature": {
+          "depends_on": [
+            "light.on"
+          ]
+        }
+      },
+      "services": {
+        "light": {
+          "on": {
+            "description": "Switch Status",
+            "format": "bool",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "type": "state"
+          },
+          "brightness": {
+            "description": "Brightness",
+            "format": "uint8",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "unit": "percentage",
+            "value-range": [
+              1,
+              100,
+              1
+            ],
+            "type": "state"
+          },
+          "color_temperature": {
+            "description": "Color Temperature",
+            "format": "uint32",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "unit": "kelvin",
+            "value-range": [
+              3000,
+              6400,
+              1
+            ],
+            "type": "state"
+          }
+        }
+      }
+    },
+    "4": {
+      "id": 4,
+      "name": "bedroom_main_light",
+      "type": "light",
+      "area": "bedroom",
+      "entities": [
+        "button.lumi_cwopcn03_5f6b_info"
+      ],
+      "cap_constraints": {
+        "light.brightness": {
+          "depends_on": [
+            "light.on"
+          ]
+        },
+        "light.color_temperature": {
+          "depends_on": [
+            "light.on"
+          ]
+        }
+      },
+      "services": {
+        "light": {
+          "on": {
+            "description": "Switch Status",
+            "format": "bool",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "type": "state"
+          },
+          "brightness": {
+            "description": "Brightness",
+            "format": "uint8",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "unit": "percentage",
+            "value-range": [
+              1,
+              100,
+              1
+            ],
+            "type": "state"
+          },
+          "color_temperature": {
+            "description": "Color Temperature",
+            "format": "uint32",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "unit": "kelvin",
+            "value-range": [
+              2700,
+              5700,
+              1
+            ],
+            "type": "state"
+          }
+        }
+      }
+    },
+    "5": {
+      "id": 5,
+      "name": "living_room_main_light",
+      "type": "light",
+      "area": "living_room",
+      "entities": [
+        "button.lumi_cwopcn02_6918_info"
+      ],
+      "cap_constraints": {
+        "light.brightness": {
+          "depends_on": [
+            "light.on"
+          ]
+        },
+        "light.color_temperature": {
+          "depends_on": [
+            "light.on"
+          ]
+        }
+      },
+      "services": {
+        "light": {
+          "on": {
+            "description": "Switch Status",
+            "format": "bool",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "type": "state"
+          },
+          "brightness": {
+            "description": "Brightness",
+            "format": "uint8",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "unit": "percentage",
+            "value-range": [
+              1,
+              100,
+              1
+            ],
+            "type": "state"
+          },
+          "color_temperature": {
+            "description": "Color Temperature",
+            "format": "uint32",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "unit": "kelvin",
+            "value-range": [
+              2700,
+              5700,
+              1
+            ],
+            "type": "state"
+          }
+        }
+      }
+    },
+    "6": {
+      "id": 6,
+      "name": "entrance_light",
+      "type": "light",
+      "area": "entrance",
+      "entities": [
+        "button.ikea_led1545g12_6f7e_info"
+      ],
+      "cap_constraints": {
+        "light.brightness": {
+          "depends_on": [
+            "light.on"
+          ]
+        },
+        "light.color_temperature": {
+          "depends_on": [
+            "light.on"
+          ]
+        }
+      },
+      "services": {
+        "light": {
+          "on": {
+            "description": "Switch Status",
+            "format": "bool",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "type": "state"
+          },
+          "brightness": {
+            "description": "Brightness",
+            "format": "uint8",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "unit": "percentage",
+            "value-range": [
+              1,
+              100,
+              1
+            ],
+            "type": "state"
+          },
+          "color_temperature": {
+            "description": "Color Temperature",
+            "format": "uint32",
+            "access": [
+              "read",
+              "write",
+              "notify"
+            ],
+            "unit": "kelvin",
+            "value-range": [
+              2200,
+              4000,
+              1
+            ],
+            "type": "state"
+          }
+        }
+      }
+    },
+    "7": {
+      "id": 7,
+      "name": "bedroom_th_sensor",
+      "type": "temperature_humidity_sensor",
+      "area": "bedroom",
+      "entities": [
+        "button.miaomiaoce_t2_eb7f_info"
+      ],
+      "cap_constraints": {},
+      "services": {
+        "temperature_humidity_sensor": {
+          "temperature": {
+            "description": "Temperature",
+            "format": "float",
+            "access": [
+              "read",
+              "notify"
+            ],
+            "unit": "celsius",
+            "value-range": [
+              -30,
+              100,
+              0.1
+            ],
+            "type": "state"
+          },
+          "relative_humidity": {
+            "description": "Relative Humidity",
+            "format": "float",
+            "access": [
+              "read",
+              "notify"
+            ],
+            "unit": "percentage",
+            "value-range": [
+              0,
+              100,
+              0.1
+            ],
+            "type": "state"
+          }
+        },
+        "battery": {
+          "battery_level": {
+            "description": "Battery Level",
+            "format": "uint8",
+            "access": [
+              "read",
+              "notify"
+            ],
+            "unit": "percentage",
+            "value-range": [
+              0,
+              100,
+              1
+            ],
+            "type": "state"
+          }
+        }
+      }
+    },
+    "8": {
+      "id": 8,
+      "name": "bathroom_motion_sensor",
+      "type": "motion_sensor",
+      "area": "bathroom",
+      "entities": [
+        "button.mirsz_ir500_fd5c_info"
+      ],
+      "cap_constraints": {},
+      "services": {
+        "motion_sensor": {
+          "motion_detected": {
+            "description": "Motion Detected",
+            "format": "event",
+            "access": [
+              "notify"
+            ],
+            "type": "event",
+            "arguments": []
+          }
+        },
+        "battery": {
+          "low_battery": {
+            "description": "Low Battery",
+            "format": "event",
+            "access": [
+              "notify"
+            ],
+            "type": "event",
+            "arguments": []
+          }
+        }
+      }
+    },
+    "9": {
+      "id": 9,
+      "name": "living_room_motion_sensor",
+      "type": "motion_sensor",
+      "area": "living_room",
+      "entities": [
+        "button.line_tr1_52c8_info"
+      ],
+      "cap_constraints": {},
+      "services": {
+        "motion_sensor": {
+          "motion_detected": {
+            "description": "Motion Detected",
+            "format": "event",
+            "access": [
+              "notify"
+            ],
+            "type": "event",
+            "arguments": []
+          }
+        },
+        "battery": {
+          "low_battery": {
+            "description": "Low Battery",
+            "format": "event",
+            "access": [
+              "notify"
+            ],
+            "type": "event",
+            "arguments": []
+          }
+        }
+      }
+    },
+    "10": {
+      "id": 10,
+      "name": "entrance_door_sensor",
+      "type": "magnet_sensor",
+      "area": "entrance",
+      "entities": [
+        "button.lumi_v2_7232_info"
+      ],
+      "cap_constraints": {},
+      "services": {
+        "magnet_sensor": {
+          "contact_state": {
+            "description": "Contact State (Note: false=open, true=closed)",
+            "format": "bool",
+            "access": [
+              "read",
+              "notify"
+            ],
+            "type": "state",
+            "value_semantics": {
+              "false": "open",
+              "true": "closed"
+            }
+          },
+          "close": {
+            "description": "Close",
+            "format": "event",
+            "access": [
+              "notify"
+            ],
+            "type": "event",
+            "arguments": []
+          },
+          "open": {
+            "description": "Open",
+            "format": "event",
+            "access": [
+              "notify"
+            ],
+            "type": "event",
+            "arguments": []
+          },
+          "door_not_closed": {
+            "description": "Door Not Closed",
+            "format": "event",
+            "access": [
+              "notify"
+            ],
+            "type": "event",
+            "arguments": []
+          }
+        },
+        "battery": {
+          "low_battery": {
+            "description": "Low Battery",
+            "format": "event",
+            "access": [
+              "notify"
+            ],
+            "type": "event",
+            "arguments": []
+          }
+        }
+      }
+    }
+  },
+  "cap_to_devices": {
+    "illumination_sensor.illumination": [
+      1
+    ],
+    "battery.battery_level": [
+      1,
+      7
+    ],
+    "air_conditioner.on": [
+      2
+    ],
+    "air_conditioner.mode": [
+      2
+    ],
+    "air_conditioner.target_temperature": [
+      2
+    ],
+    "air_conditioner.eco": [
+      2
+    ],
+    "air_conditioner.heater": [
+      2
+    ],
+    "air_conditioner.dryer": [
+      2
+    ],
+    "air_conditioner.sleep_mode": [
+      2
+    ],
+    "fan_control.fan_level": [
+      2
+    ],
+    "fan_control.vertical_swing": [
+      2
+    ],
+    "environment.temperature": [
+      2
+    ],
+    "alarm.alarm": [
+      2
+    ],
+    "indicator_light.on": [
+      2
+    ],
+    "electricity.electricity": [
+      2
+    ],
+    "electricity.elec_count": [
+      2
+    ],
+    "maintenance.clean": [
+      2
+    ],
+    "maintenance.examine": [
+      2
+    ],
+    "maintenance.error": [
+      2
+    ],
+    "maintenance.running_duration": [
+      2
+    ],
+    "maintenance.filtertest": [
+      2
+    ],
+    "maintenance.examine_result": [
+      2
+    ],
+    "maintenance.clean_result": [
+      2
+    ],
+    "maintenance.button_pressed": [
+      2
+    ],
+    "maintenance.button_released": [
+      2
+    ],
+    "enhance.fan_percent": [
+      2
+    ],
+    "enhance.timer": [
+      2
+    ],
+    "light.on": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "light.brightness": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "light.color_temperature": [
+      3,
+      4,
+      5,
+      6
+    ],
+    "temperature_humidity_sensor.temperature": [
+      7
+    ],
+    "temperature_humidity_sensor.relative_humidity": [
+      7
+    ],
+    "motion_sensor.motion_detected": [
+      8,
+      9
+    ],
+    "battery.low_battery": [
+      8,
+      9,
+      10
+    ],
+    "magnet_sensor.contact_state": [
+      10
+    ],
+    "magnet_sensor.close": [
+      10
+    ],
+    "magnet_sensor.open": [
+      10
+    ],
+    "magnet_sensor.door_not_closed": [
+      10
+    ]
+  },
+  "device_to_caps": {
+    "1": [
+      {
+        "cap_key": "battery.battery_level",
+        "type": "state"
+      },
+      {
+        "cap_key": "illumination_sensor.illumination",
+        "type": "state"
+      }
+    ],
+    "2": [
+      {
+        "cap_key": "air_conditioner.dryer",
+        "type": "state"
+      },
+      {
+        "cap_key": "air_conditioner.eco",
+        "type": "state"
+      },
+      {
+        "cap_key": "air_conditioner.heater",
+        "type": "state"
+      },
+      {
+        "cap_key": "air_conditioner.mode",
+        "type": "state"
+      },
+      {
+        "cap_key": "air_conditioner.on",
+        "type": "state"
+      },
+      {
+        "cap_key": "air_conditioner.sleep_mode",
+        "type": "state"
+      },
+      {
+        "cap_key": "air_conditioner.target_temperature",
+        "type": "state"
+      },
+      {
+        "cap_key": "alarm.alarm",
+        "type": "state"
+      },
+      {
+        "cap_key": "electricity.elec_count",
+        "type": "state"
+      },
+      {
+        "cap_key": "electricity.electricity",
+        "type": "state"
+      },
+      {
+        "cap_key": "enhance.fan_percent",
+        "type": "state"
+      },
+      {
+        "cap_key": "enhance.timer",
+        "type": "state"
+      },
+      {
+        "cap_key": "environment.temperature",
+        "type": "state"
+      },
+      {
+        "cap_key": "fan_control.fan_level",
+        "type": "state"
+      },
+      {
+        "cap_key": "fan_control.vertical_swing",
+        "type": "state"
+      },
+      {
+        "cap_key": "indicator_light.on",
+        "type": "state"
+      },
+      {
+        "cap_key": "maintenance.button_pressed",
+        "type": "event"
+      },
+      {
+        "cap_key": "maintenance.button_released",
+        "type": "event"
+      },
+      {
+        "cap_key": "maintenance.clean",
+        "type": "state"
+      },
+      {
+        "cap_key": "maintenance.clean_result",
+        "type": "event"
+      },
+      {
+        "cap_key": "maintenance.error",
+        "type": "event"
+      },
+      {
+        "cap_key": "maintenance.examine",
+        "type": "state"
+      },
+      {
+        "cap_key": "maintenance.examine_result",
+        "type": "event"
+      },
+      {
+        "cap_key": "maintenance.filtertest",
+        "type": "event"
+      },
+      {
+        "cap_key": "maintenance.running_duration",
+        "type": "event"
+      }
+    ],
+    "3": [
+      {
+        "cap_key": "light.brightness",
+        "type": "state"
+      },
+      {
+        "cap_key": "light.color_temperature",
+        "type": "state"
+      },
+      {
+        "cap_key": "light.on",
+        "type": "state"
+      }
+    ],
+    "4": [
+      {
+        "cap_key": "light.brightness",
+        "type": "state"
+      },
+      {
+        "cap_key": "light.color_temperature",
+        "type": "state"
+      },
+      {
+        "cap_key": "light.on",
+        "type": "state"
+      }
+    ],
+    "5": [
+      {
+        "cap_key": "light.brightness",
+        "type": "state"
+      },
+      {
+        "cap_key": "light.color_temperature",
+        "type": "state"
+      },
+      {
+        "cap_key": "light.on",
+        "type": "state"
+      }
+    ],
+    "6": [
+      {
+        "cap_key": "light.brightness",
+        "type": "state"
+      },
+      {
+        "cap_key": "light.color_temperature",
+        "type": "state"
+      },
+      {
+        "cap_key": "light.on",
+        "type": "state"
+      }
+    ],
+    "7": [
+      {
+        "cap_key": "battery.battery_level",
+        "type": "state"
+      },
+      {
+        "cap_key": "temperature_humidity_sensor.relative_humidity",
+        "type": "state"
+      },
+      {
+        "cap_key": "temperature_humidity_sensor.temperature",
+        "type": "state"
+      }
+    ],
+    "8": [
+      {
+        "cap_key": "battery.low_battery",
+        "type": "event"
+      },
+      {
+        "cap_key": "motion_sensor.motion_detected",
+        "type": "event"
+      }
+    ],
+    "9": [
+      {
+        "cap_key": "battery.low_battery",
+        "type": "event"
+      },
+      {
+        "cap_key": "motion_sensor.motion_detected",
+        "type": "event"
+      }
+    ],
+    "10": [
+      {
+        "cap_key": "battery.low_battery",
+        "type": "event"
+      },
+      {
+        "cap_key": "magnet_sensor.close",
+        "type": "event"
+      },
+      {
+        "cap_key": "magnet_sensor.contact_state",
+        "type": "state"
+      },
+      {
+        "cap_key": "magnet_sensor.door_not_closed",
+        "type": "event"
+      },
+      {
+        "cap_key": "magnet_sensor.open",
+        "type": "event"
+      }
+    ]
+  },
+  "cap_catalog": {
+    "air_conditioner.dryer": {
+      "service": "air_conditioner",
+      "property": "dryer",
+      "cap_key": "air_conditioner.dryer",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition",
+        "action"
+      ]
+    },
+    "air_conditioner.eco": {
+      "service": "air_conditioner",
+      "property": "eco",
+      "cap_key": "air_conditioner.eco",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition",
+        "action"
+      ]
+    },
+    "air_conditioner.heater": {
+      "service": "air_conditioner",
+      "property": "heater",
+      "cap_key": "air_conditioner.heater",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition",
+        "action"
+      ]
+    },
+    "air_conditioner.mode": {
+      "service": "air_conditioner",
+      "property": "mode",
+      "cap_key": "air_conditioner.mode",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition",
+        "action"
+      ]
+    },
+    "air_conditioner.on": {
+      "service": "air_conditioner",
+      "property": "on",
+      "cap_key": "air_conditioner.on",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition",
+        "action"
+      ]
+    },
+    "air_conditioner.sleep_mode": {
+      "service": "air_conditioner",
+      "property": "sleep_mode",
+      "cap_key": "air_conditioner.sleep_mode",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition",
+        "action"
+      ]
+    },
+    "air_conditioner.target_temperature": {
+      "service": "air_conditioner",
+      "property": "target_temperature",
+      "cap_key": "air_conditioner.target_temperature",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition",
+        "action"
+      ]
+    },
+    "alarm.alarm": {
+      "service": "alarm",
+      "property": "alarm",
+      "cap_key": "alarm.alarm",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition",
+        "action"
+      ]
+    },
+    "battery.battery_level": {
+      "service": "battery",
+      "property": "battery_level",
+      "cap_key": "battery.battery_level",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition"
+      ]
+    },
+    "battery.low_battery": {
+      "service": "battery",
+      "property": "low_battery",
+      "cap_key": "battery.low_battery",
+      "type": "event",
+      "TAP_role": [
+        "trigger"
+      ]
+    },
+    "electricity.elec_count": {
+      "service": "electricity",
+      "property": "elec_count",
+      "cap_key": "electricity.elec_count",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition"
+      ]
+    },
+    "electricity.electricity": {
+      "service": "electricity",
+      "property": "electricity",
+      "cap_key": "electricity.electricity",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition"
+      ]
+    },
+    "enhance.fan_percent": {
+      "service": "enhance",
+      "property": "fan_percent",
+      "cap_key": "enhance.fan_percent",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition",
+        "action"
+      ]
+    },
+    "enhance.timer": {
+      "service": "enhance",
+      "property": "timer",
+      "cap_key": "enhance.timer",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition",
+        "action"
+      ]
+    },
+    "environment.temperature": {
+      "service": "environment",
+      "property": "temperature",
+      "cap_key": "environment.temperature",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition"
+      ]
+    },
+    "fan_control.fan_level": {
+      "service": "fan_control",
+      "property": "fan_level",
+      "cap_key": "fan_control.fan_level",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition",
+        "action"
+      ]
+    },
+    "fan_control.vertical_swing": {
+      "service": "fan_control",
+      "property": "vertical_swing",
+      "cap_key": "fan_control.vertical_swing",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition",
+        "action"
+      ]
+    },
+    "illumination_sensor.illumination": {
+      "service": "illumination_sensor",
+      "property": "illumination",
+      "cap_key": "illumination_sensor.illumination",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition"
+      ]
+    },
+    "indicator_light.on": {
+      "service": "indicator_light",
+      "property": "on",
+      "cap_key": "indicator_light.on",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition",
+        "action"
+      ]
+    },
+    "light.brightness": {
+      "service": "light",
+      "property": "brightness",
+      "cap_key": "light.brightness",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition",
+        "action"
+      ]
+    },
+    "light.color_temperature": {
+      "service": "light",
+      "property": "color_temperature",
+      "cap_key": "light.color_temperature",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition",
+        "action"
+      ]
+    },
+    "light.on": {
+      "service": "light",
+      "property": "on",
+      "cap_key": "light.on",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition",
+        "action"
+      ]
+    },
+    "magnet_sensor.close": {
+      "service": "magnet_sensor",
+      "property": "close",
+      "cap_key": "magnet_sensor.close",
+      "type": "event",
+      "TAP_role": [
+        "trigger"
+      ]
+    },
+    "magnet_sensor.contact_state": {
+      "service": "magnet_sensor",
+      "property": "contact_state",
+      "cap_key": "magnet_sensor.contact_state",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition"
+      ]
+    },
+    "magnet_sensor.door_not_closed": {
+      "service": "magnet_sensor",
+      "property": "door_not_closed",
+      "cap_key": "magnet_sensor.door_not_closed",
+      "type": "event",
+      "TAP_role": [
+        "trigger"
+      ]
+    },
+    "magnet_sensor.open": {
+      "service": "magnet_sensor",
+      "property": "open",
+      "cap_key": "magnet_sensor.open",
+      "type": "event",
+      "TAP_role": [
+        "trigger"
+      ]
+    },
+    "maintenance.button_pressed": {
+      "service": "maintenance",
+      "property": "button_pressed",
+      "cap_key": "maintenance.button_pressed",
+      "type": "event",
+      "TAP_role": [
+        "trigger"
+      ]
+    },
+    "maintenance.button_released": {
+      "service": "maintenance",
+      "property": "button_released",
+      "cap_key": "maintenance.button_released",
+      "type": "event",
+      "TAP_role": [
+        "trigger"
+      ]
+    },
+    "maintenance.clean": {
+      "service": "maintenance",
+      "property": "clean",
+      "cap_key": "maintenance.clean",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition",
+        "action"
+      ]
+    },
+    "maintenance.clean_result": {
+      "service": "maintenance",
+      "property": "clean_result",
+      "cap_key": "maintenance.clean_result",
+      "type": "event",
+      "TAP_role": [
+        "trigger"
+      ]
+    },
+    "maintenance.error": {
+      "service": "maintenance",
+      "property": "error",
+      "cap_key": "maintenance.error",
+      "type": "event",
+      "TAP_role": [
+        "trigger"
+      ]
+    },
+    "maintenance.examine": {
+      "service": "maintenance",
+      "property": "examine",
+      "cap_key": "maintenance.examine",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition",
+        "action"
+      ]
+    },
+    "maintenance.examine_result": {
+      "service": "maintenance",
+      "property": "examine_result",
+      "cap_key": "maintenance.examine_result",
+      "type": "event",
+      "TAP_role": [
+        "trigger"
+      ]
+    },
+    "maintenance.filtertest": {
+      "service": "maintenance",
+      "property": "filtertest",
+      "cap_key": "maintenance.filtertest",
+      "type": "event",
+      "TAP_role": [
+        "trigger"
+      ]
+    },
+    "maintenance.running_duration": {
+      "service": "maintenance",
+      "property": "running_duration",
+      "cap_key": "maintenance.running_duration",
+      "type": "event",
+      "TAP_role": [
+        "trigger"
+      ]
+    },
+    "motion_sensor.motion_detected": {
+      "service": "motion_sensor",
+      "property": "motion_detected",
+      "cap_key": "motion_sensor.motion_detected",
+      "type": "event",
+      "TAP_role": [
+        "trigger"
+      ]
+    },
+    "temperature_humidity_sensor.relative_humidity": {
+      "service": "temperature_humidity_sensor",
+      "property": "relative_humidity",
+      "cap_key": "temperature_humidity_sensor.relative_humidity",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition"
+      ]
+    },
+    "temperature_humidity_sensor.temperature": {
+      "service": "temperature_humidity_sensor",
+      "property": "temperature",
+      "cap_key": "temperature_humidity_sensor.temperature",
+      "type": "state",
+      "TAP_role": [
+        "trigger",
+        "condition"
+      ]
+    }
+  }
+}

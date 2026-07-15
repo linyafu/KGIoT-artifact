@@ -1,0 +1,61 @@
+home_id,index,request_id,category,request,has_implicit_deps,has_implicit_interlocks
+home_L,1,HL_BASIC_001,Basic TAP,"When the front door opens, turn on the entrance light.",False,False
+home_L,2,HL_BASIC_002,Basic TAP,"When motion is detected in the study, turn on the study main light.",False,False
+home_L,3,HL_BASIC_003,Basic TAP,"If the living room illumination drops below 50 lux, turn on the living room floor lamp.",False,False
+home_L,4,HL_BASIC_004,Basic TAP,"When the kitchen cooker is turned on, turn on the kitchen range hood.",False,False
+home_L,5,HL_BASIC_005,Basic TAP,"If the master bedroom humidity drops below 30%, turn on the master bedroom humidifier.",False,False
+home_L,6,HL_COND_006,Conditional TAP,"When the front door closes, turn off the entrance light if it is on.",False,False
+home_L,7,HL_COND_007,Conditional TAP,"When motion is detected in the living room, turn on the living room main light if the illumination is below 80 lux.",False,False
+home_L,8,HL_COND_008,Conditional TAP,"When no motion has been detected in the kitchen for more than 10 minutes, turn off the kitchen light if it is on.",False,False
+home_L,9,HL_COND_009,Conditional TAP,"If the humidity in the master bedroom drops below 30% before 11 PM, turn on the humidifier.",False,False
+home_L,10,HL_COND_010,Conditional TAP,"If the illumination in the second bedroom drops below 50 lux between 9 AM and 6 PM, open the curtain if it is closed.",False,False
+home_L,11,HL_MULTI_011,Multi-Action TAP,"When the front door opens between 6:30 PM and 9 PM, turn on the entrance light, turn on the living room main light at 60% brightness, and turn on the air purifier and set it to auto mode.",False,False
+home_L,12,HL_MULTI_012,Multi-Action TAP,"At 11:30 PM, if the master bedroom window is closed, turn off the master bedroom main light, turn on the bedside lamp at 15% brightness, close the bedroom curtain, turn on the air conditioner and set it to 26°C, and turn on the humidifier.",False,False
+home_L,13,HL_MULTI_013,Multi-Action TAP,"At 7:00 AM, open the master bedroom curtain, turn on the master bedroom main light at 50% brightness, turn off the air conditioner, and turn off the humidifier.",False,False
+home_L,14,HL_MULTI_014,Multi-Action TAP,"When motion is detected in the study between 9 AM and 6 PM, turn on the main light at 80% brightness and 4300K, turn on the desk lamp in office mode, and turn on the air conditioner and set it to 26°C.",False,False
+home_L,15,HL_MULTI_015,Multi-Action TAP,"When the TV starts playing in the living room between 7 PM and 10:30 PM, dim the main light to 40% brightness, turn on the floor lamp and set it to 3000K, close the living room curtain using the close command, and turn on the air purifier and set it to sleep mode.",False,False
+home_L,16,HL_CA_016,Constraint-Aware TAP,"When the kitchen cooker starts cooking, set the kitchen range hood to high.",True,False
+home_L,17,HL_CA_017,Constraint-Aware TAP,"When the TV starts playing in the living room, dim the main light brightness to 60%.",True,False
+home_L,18,HL_CA_018,Constraint-Aware TAP,"If the humidity in the master bedroom drops below 35%, set the humidifier target humidity to 50%.",True,False
+home_L,19,HL_CA_019,Constraint-Aware TAP,"When the temperature in the second bedroom rises above 28°C, set the AC to cooling mode at 25°C.",True,True
+home_L,20,HL_CA_020,Constraint-Aware TAP,"When the temperature in the bathroom drops below 18°C, set the bathroom heater to heat mode.",False,True
+home_M,1,HM_BASIC_001,Basic TAP,"When the entrance door is unlocked, turn on the entrance light.",False,False
+home_M,2,HM_BASIC_002,Basic TAP,"When the living room illumination drops below 100 lux, turn on the living room main light.",False,False
+home_M,3,HM_BASIC_003,Basic TAP,"When the bedside lamp is turned on, turn off the bedroom main light.",False,False
+home_M,4,HM_BASIC_004,Basic TAP,"When motion is detected in the bathroom, turn on the bathroom light.",False,False
+home_M,5,HM_BASIC_005,Basic TAP,"When the cooker is turned on, turn on the kitchen range hood.",False,False
+home_M,6,HM_COND_006,Conditional TAP,"When motion is detected in the living room, if the illumination is below 100 lux, turn on the living room floor lamp.",False,False
+home_M,7,HM_COND_007,Conditional TAP,"When the bathroom temperature is below 20°C, if the door is closed, turn on the bathroom heater in heat mode.",False,False
+home_M,8,HM_COND_008,Conditional TAP,"When the bedroom window is opened, if the air conditioner is running, turn off the bedroom air conditioner.",False,False
+home_M,9,HM_COND_009,Conditional TAP,"When the cooker is turned on, if the kitchen light is on, turn on the kitchen range hood.",False,False
+home_M,10,HM_COND_010,Conditional TAP,"When the living room main light is turned off after 10 PM, turn off the TV.",False,False
+home_M,11,HM_MULTI_011,Multi-Action TAP,"When the entrance door is unlocked, turn on the entrance light and the living room main light.",False,False
+home_M,12,HM_MULTI_012,Multi-Action TAP,"When motion is detected in the living room, if the illumination is below 100 lux, turn on the living room floor lamp and set its brightness to 40% and color temperature to 3000K.",False,False
+home_M,13,HM_MULTI_013,Multi-Action TAP,"When the bedroom temperature exceeds 27 °C, if the bedroom window is closed, turn on the bedroom air conditioner in cooling mode at 23 °C.",False,False
+home_M,14,HM_MULTI_014,Multi-Action TAP,"When cooking starts on the cooker, turn on the kitchen range hood and the kitchen light.",False,False
+home_M,15,HM_MULTI_015,Multi-Action TAP,"When the bathroom humidity exceeds 75%, if the door is closed, turn on the bathroom heater in ventilation mode and turn on the bathroom light.",False,False
+home_M,16,HM_CA_016,Constraint-Aware TAP,"When motion is detected in the living room, set the living room floor lamp color temperature to 3000K.",True,False
+home_M,17,HM_CA_017,Constraint-Aware TAP,"When the living room TV starts playing, set the living room floor lamp brightness to 40%.",True,False
+home_M,18,HM_CA_018,Constraint-Aware TAP,"If the bedroom temperature goes over 28 degrees Celsius, switch on the air conditioner and set it to cooling mode at 24°C.",False,True
+home_M,19,HM_CA_019,Constraint-Aware TAP,"When the bathroom temperature drops below 18°C, turn on the bathroom heater in heat mode.",False,True
+home_M,20,HM_CA_020,Constraint-Aware TAP,Set the bedroom air conditioner to cooling mode at 24°C when the bedroom temperature exceeds 28°C.,True,True
+home_S,1,HS_BASIC_001,Basic TAP,"When motion is detected in the bathroom, turn on the bathroom light.",False,False
+home_S,2,HS_BASIC_002,Basic TAP,"When motion is detected in the living room, turn on the living room main light.",False,False
+home_S,3,HS_BASIC_003,Basic TAP,"When the entrance door is opened, turn on the entrance light.",False,False
+home_S,4,HS_BASIC_004,Basic TAP,"When the entrance door is closed, turn off the entrance light.",False,False
+home_S,5,HS_BASIC_005,Basic TAP,"When the bedroom temperature exceeds 29°C, turn on the bedroom air conditioner.",False,False
+home_S,6,HS_COND_006,Conditional TAP,"When motion is detected in the living room, if the illumination is below 80 lux, turn on the living room main light.",False,False
+home_S,7,HS_COND_007,Conditional TAP,"When the entrance door is opened, if it is after 9 PM, turn on the entrance light.",False,False
+home_S,8,HS_COND_008,Conditional TAP,"When the bedroom humidity exceeds 70%, if the bedroom air conditioner is off, turn on the bedroom air conditioner.",False,False
+home_S,9,HS_COND_009,Conditional TAP,"When the entrance door is closed, if it is after 10 PM, turn on the bedroom main light.",False,False
+home_S,10,HS_COND_010,Conditional TAP,"When the bedroom temperature exceeds 27°C, if it is after 11 PM, turn on the bedroom air conditioner.",False,False
+home_S,11,HS_MULTI_011,Multi-Action TAP,"When the entrance door is opened, turn on the entrance light and the living room main light.",False,False
+home_S,12,HS_MULTI_012,Multi-Action TAP,"When motion is detected in the bathroom, turn on the bathroom light and set its brightness to 70%.",False,False
+home_S,13,HS_MULTI_013,Multi-Action TAP,"When motion is detected in the living room, turn on the living room main light and set its color temperature to 3500K.",False,False
+home_S,14,HS_MULTI_014,Multi-Action TAP,"When the bedroom temperature exceeds 28°C, turn on the bedroom air conditioner, set it to cooling mode, and set the target temperature to 24°C.",False,False
+home_S,15,HS_MULTI_015,Multi-Action TAP,"When the bedroom humidity exceeds 75%, turn on the bedroom air conditioner and set it to dry mode.",False,False
+home_S,16,HS_CA_016,Constraint-Aware TAP,"When motion is detected in the bathroom, set the bathroom light brightness to 40%.",True,False
+home_S,17,HS_CA_017,Constraint-Aware TAP,"When the entrance door is opened, set the entrance light color temperature to 2700K.",True,False
+home_S,18,HS_CA_018,Constraint-Aware TAP,"When the bedroom temperature exceeds 27°C, set the bedroom air conditioner to cooling mode at 23°C.",True,False
+home_S,19,HS_CA_019,Constraint-Aware TAP,"When the bedroom temperature drops below 17°C, set the bedroom air conditioner to heat mode at 26°C.",True,False
+home_S,20,HS_CA_020,Constraint-Aware TAP,"When the living room illumination drops below 60 lux, set the living room main light brightness to 35% and color temperature to 3000K.",True,False

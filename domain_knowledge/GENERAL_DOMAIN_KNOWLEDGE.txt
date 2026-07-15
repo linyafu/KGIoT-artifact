@@ -1,0 +1,18 @@
+Use these general domain rules in addition to the user request and device context.
+They are plain-text rules converted from the general KG construction templates used by KGIoT. They are not a KG, not a graph, and not ground-truth answers.
+Apply them only when the relevant service/property is available in the provided device context.
+
+Operational dependency rule:
+- If a service has a writable power-control property identified from platform metadata, then other writable numeric or enum-like properties in the same service depend on that power-control property.
+- Rationale: configuration/control properties are ineffective when the corresponding device or service is off.
+- In TAP generation, such dependencies are prerequisite actions and should appear in the action field before the dependent action.
+
+Environmental interlock rule:
+- For climate-control or heater-control actions, if the same room/area as the controlled device has a relevant contact or magnet sensor, require that sensor to indicate the corresponding door/window is closed.
+- In TAP generation, such interlocks are safety/environment guards and should appear in the condition field.
+
+Value semantics rules:
+- For magnet/contact sensors, contact_state=false means open and contact_state=true means closed.
+- For curtain position properties, position 0 means closed and position 100 means open.
+
+Use only device ids, services, and properties that appear in the provided device context. Do not invent devices or properties.

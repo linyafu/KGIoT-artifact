@@ -1,0 +1,972 @@
+{
+  "benchmark_version": "1.0",
+  "schema_version": "tap-benchmark-v1",
+  "description": "Natural-language smart-home TAP benchmark with explicit-intent and implicit-constraint annotations.",
+  "category_ranges": [
+    {
+      "range": "1-5",
+      "category": "Basic TAP"
+    },
+    {
+      "range": "6-10",
+      "category": "Conditional TAP"
+    },
+    {
+      "range": "11-15",
+      "category": "Multi-Action TAP"
+    },
+    {
+      "range": "16-20",
+      "category": "Constraint-Aware TAP"
+    }
+  ],
+  "scoring_targets": {
+    "explicit_intent": "Match only trigger, condition, and action atoms stated in the user request.",
+    "implicit_constraint_completion": "Recall required dependency and interlock atoms not stated in the request; reported on Constraint-Aware TAP.",
+    "executable_correctness": "Match the full executable TAP including explicit intent and implicit constraints."
+  },
+  "home_id": "home_L",
+  "ground_truth": {
+    "1. When the front door opens, turn on the entrance light.": {
+      "request_id": "HL_BASIC_001",
+      "home_id": "home_L",
+      "category": "Basic TAP",
+      "request": "When the front door opens, turn on the entrance light.",
+      "explicit_tap": {
+        "trigger": "event:entrance_door_sensor.magnet_sensor.open",
+        "condition": "",
+        "action": "entrance_light.light.on=true"
+      },
+      "explicit_labels": {
+        "trigger": [
+          "event:entrance_door_sensor.magnet_sensor.open"
+        ],
+        "conditions": [],
+        "actions": [
+          "entrance_light.light.on=true"
+        ]
+      },
+      "implicit_constraints": {
+        "dependencies": [],
+        "interlocks": []
+      },
+      "tap": {
+        "trigger": "event:entrance_door_sensor.magnet_sensor.open",
+        "condition": "",
+        "action": "entrance_light.light.on=true"
+      },
+      "acceptable_taps": [
+        {
+          "trigger": "entrance_smart_lock.door.door_state==32",
+          "condition": "",
+          "action": "entrance_light.light.on=true"
+        },
+        {
+          "trigger": "entrance_door_sensor.magnet_sensor.contact_state==false",
+          "condition": "",
+          "action": "entrance_light.light.on=true"
+        }
+      ],
+      "annotation_notes": "No implicit operational dependency or interlock is annotated for this category. Acceptable variants encode semantically equivalent trigger/action representations.",
+      "acceptable_explicit_taps": [
+        {
+          "trigger": "entrance_door_sensor.magnet_sensor.contact_state==false",
+          "condition": "",
+          "action": "entrance_light.light.on=true"
+        }
+      ]
+    },
+    "2. When motion is detected in the study, turn on the study main light.": {
+      "request_id": "HL_BASIC_002",
+      "home_id": "home_L",
+      "category": "Basic TAP",
+      "request": "When motion is detected in the study, turn on the study main light.",
+      "explicit_tap": {
+        "trigger": "event:study_motion_sensor.motion_sensor.motion_detected",
+        "condition": "",
+        "action": "study_main_light.light.on=true"
+      },
+      "explicit_labels": {
+        "trigger": [
+          "event:study_motion_sensor.motion_sensor.motion_detected"
+        ],
+        "conditions": [],
+        "actions": [
+          "study_main_light.light.on=true"
+        ]
+      },
+      "implicit_constraints": {
+        "dependencies": [],
+        "interlocks": []
+      },
+      "tap": {
+        "trigger": "event:study_motion_sensor.motion_sensor.motion_detected",
+        "condition": "",
+        "action": "study_main_light.light.on=true"
+      },
+      "acceptable_taps": [],
+      "annotation_notes": "No implicit operational dependency or interlock is annotated for this category."
+    },
+    "3. If the living room illumination drops below 50 lux, turn on the living room floor lamp.": {
+      "request_id": "HL_BASIC_003",
+      "home_id": "home_L",
+      "category": "Basic TAP",
+      "request": "If the living room illumination drops below 50 lux, turn on the living room floor lamp.",
+      "explicit_tap": {
+        "trigger": "living_room_illumination_sensor.illumination_sensor.illumination<50",
+        "condition": "",
+        "action": "living_room_floor_lamp.light.on=true"
+      },
+      "explicit_labels": {
+        "trigger": [
+          "living_room_illumination_sensor.illumination_sensor.illumination<50"
+        ],
+        "conditions": [],
+        "actions": [
+          "living_room_floor_lamp.light.on=true"
+        ]
+      },
+      "implicit_constraints": {
+        "dependencies": [],
+        "interlocks": []
+      },
+      "tap": {
+        "trigger": "living_room_illumination_sensor.illumination_sensor.illumination<50",
+        "condition": "",
+        "action": "living_room_floor_lamp.light.on=true"
+      },
+      "acceptable_taps": [],
+      "annotation_notes": "No implicit operational dependency or interlock is annotated for this category."
+    },
+    "4. When the kitchen cooker is turned on, turn on the kitchen range hood.": {
+      "request_id": "HL_BASIC_004",
+      "home_id": "home_L",
+      "category": "Basic TAP",
+      "request": "When the kitchen cooker is turned on, turn on the kitchen range hood.",
+      "explicit_tap": {
+        "trigger": "kitchen_cooker.kitchen_stove.status==2",
+        "condition": "",
+        "action": "kitchen_hood.hood.on=true"
+      },
+      "explicit_labels": {
+        "trigger": [
+          "kitchen_cooker.kitchen_stove.status==2"
+        ],
+        "conditions": [],
+        "actions": [
+          "kitchen_hood.hood.on=true"
+        ]
+      },
+      "implicit_constraints": {
+        "dependencies": [],
+        "interlocks": []
+      },
+      "tap": {
+        "trigger": "kitchen_cooker.kitchen_stove.status==2",
+        "condition": "",
+        "action": "kitchen_hood.hood.on=true"
+      },
+      "acceptable_taps": [],
+      "annotation_notes": "No implicit operational dependency or interlock is annotated for this category."
+    },
+    "5. If the master bedroom humidity drops below 30%, turn on the master bedroom humidifier.": {
+      "request_id": "HL_BASIC_005",
+      "home_id": "home_L",
+      "category": "Basic TAP",
+      "request": "If the master bedroom humidity drops below 30%, turn on the master bedroom humidifier.",
+      "explicit_tap": {
+        "trigger": "bedroom_th_sensor.temperature_humidity_sensor.relative_humidity<30",
+        "condition": "",
+        "action": "bedroom_humidifier.humidifier.on=true"
+      },
+      "explicit_labels": {
+        "trigger": [
+          "bedroom_th_sensor.temperature_humidity_sensor.relative_humidity<30"
+        ],
+        "conditions": [],
+        "actions": [
+          "bedroom_humidifier.humidifier.on=true"
+        ]
+      },
+      "implicit_constraints": {
+        "dependencies": [],
+        "interlocks": []
+      },
+      "tap": {
+        "trigger": "bedroom_th_sensor.temperature_humidity_sensor.relative_humidity<30",
+        "condition": "",
+        "action": "bedroom_humidifier.humidifier.on=true"
+      },
+      "acceptable_taps": [],
+      "annotation_notes": "No implicit operational dependency or interlock is annotated for this category."
+    },
+    "6. When the front door closes, turn off the entrance light if it is on.": {
+      "request_id": "HL_COND_006",
+      "home_id": "home_L",
+      "category": "Conditional TAP",
+      "request": "When the front door closes, turn off the entrance light if it is on.",
+      "explicit_tap": {
+        "trigger": "event:entrance_door_sensor.magnet_sensor.close",
+        "condition": "entrance_light.light.on==true",
+        "action": "entrance_light.light.on=false"
+      },
+      "explicit_labels": {
+        "trigger": [
+          "event:entrance_door_sensor.magnet_sensor.close"
+        ],
+        "conditions": [
+          "entrance_light.light.on==true"
+        ],
+        "actions": [
+          "entrance_light.light.on=false"
+        ]
+      },
+      "implicit_constraints": {
+        "dependencies": [],
+        "interlocks": []
+      },
+      "tap": {
+        "trigger": "event:entrance_door_sensor.magnet_sensor.close",
+        "condition": "entrance_light.light.on==true",
+        "action": "entrance_light.light.on=false"
+      },
+      "acceptable_taps": [
+        {
+          "trigger": "entrance_door_sensor.magnet_sensor.contact_state==true",
+          "condition": "entrance_light.light.on==true",
+          "action": "entrance_light.light.on=false"
+        }
+      ],
+      "annotation_notes": "No implicit operational dependency or interlock is annotated for this category.",
+      "acceptable_explicit_taps": [
+        {
+          "trigger": "entrance_door_sensor.magnet_sensor.contact_state==true",
+          "condition": "entrance_light.light.on==true",
+          "action": "entrance_light.light.on=false"
+        }
+      ]
+    },
+    "7. When motion is detected in the living room, turn on the living room main light if the illumination is below 80 lux.": {
+      "request_id": "HL_COND_007",
+      "home_id": "home_L",
+      "category": "Conditional TAP",
+      "request": "When motion is detected in the living room, turn on the living room main light if the illumination is below 80 lux.",
+      "explicit_tap": {
+        "trigger": "event:living_room_motion_sensor.motion_sensor.motion_detected",
+        "condition": "living_room_illumination_sensor.illumination_sensor.illumination<80",
+        "action": "living_room_main_light.light.on=true"
+      },
+      "explicit_labels": {
+        "trigger": [
+          "event:living_room_motion_sensor.motion_sensor.motion_detected"
+        ],
+        "conditions": [
+          "living_room_illumination_sensor.illumination_sensor.illumination<80"
+        ],
+        "actions": [
+          "living_room_main_light.light.on=true"
+        ]
+      },
+      "implicit_constraints": {
+        "dependencies": [],
+        "interlocks": []
+      },
+      "tap": {
+        "trigger": "event:living_room_motion_sensor.motion_sensor.motion_detected",
+        "condition": "living_room_illumination_sensor.illumination_sensor.illumination<80",
+        "action": "living_room_main_light.light.on=true"
+      },
+      "acceptable_taps": [],
+      "annotation_notes": "No implicit operational dependency or interlock is annotated for this category."
+    },
+    "8. When no motion has been detected in the kitchen for more than 10 minutes, turn off the kitchen light if it is on.": {
+      "request_id": "HL_COND_008",
+      "home_id": "home_L",
+      "category": "Conditional TAP",
+      "request": "When no motion has been detected in the kitchen for more than 10 minutes, turn off the kitchen light if it is on.",
+      "explicit_tap": {
+        "trigger": "kitchen_motion_sensor.motion_sensor.no_motion_duration>600",
+        "condition": "kitchen_light.light.on==true",
+        "action": "kitchen_light.light.on=false"
+      },
+      "explicit_labels": {
+        "trigger": [
+          "kitchen_motion_sensor.motion_sensor.no_motion_duration>600"
+        ],
+        "conditions": [
+          "kitchen_light.light.on==true"
+        ],
+        "actions": [
+          "kitchen_light.light.on=false"
+        ]
+      },
+      "implicit_constraints": {
+        "dependencies": [],
+        "interlocks": []
+      },
+      "tap": {
+        "trigger": "kitchen_motion_sensor.motion_sensor.no_motion_duration>600",
+        "condition": "kitchen_light.light.on==true",
+        "action": "kitchen_light.light.on=false"
+      },
+      "acceptable_taps": [],
+      "annotation_notes": "No implicit operational dependency or interlock is annotated for this category."
+    },
+    "9. If the humidity in the master bedroom drops below 30% before 11 PM, turn on the humidifier.": {
+      "request_id": "HL_COND_009",
+      "home_id": "home_L",
+      "category": "Conditional TAP",
+      "request": "If the humidity in the master bedroom drops below 30% before 11 PM, turn on the humidifier.",
+      "explicit_tap": {
+        "trigger": "bedroom_th_sensor.temperature_humidity_sensor.relative_humidity<30",
+        "condition": "time<=23:00",
+        "action": "bedroom_humidifier.humidifier.on=true"
+      },
+      "explicit_labels": {
+        "trigger": [
+          "bedroom_th_sensor.temperature_humidity_sensor.relative_humidity<30"
+        ],
+        "conditions": [
+          "time<=23:00"
+        ],
+        "actions": [
+          "bedroom_humidifier.humidifier.on=true"
+        ]
+      },
+      "implicit_constraints": {
+        "dependencies": [],
+        "interlocks": []
+      },
+      "tap": {
+        "trigger": "bedroom_th_sensor.temperature_humidity_sensor.relative_humidity<30",
+        "condition": "time<=23:00",
+        "action": "bedroom_humidifier.humidifier.on=true"
+      },
+      "acceptable_taps": [
+        {
+          "trigger": "bedroom_th_sensor.temperature_humidity_sensor.relative_humidity<30",
+          "condition": "time<23:00",
+          "action": "bedroom_humidifier.humidifier.on=true"
+        }
+      ],
+      "annotation_notes": "No implicit operational dependency or interlock is annotated for this category.",
+      "acceptable_explicit_taps": [
+        {
+          "trigger": "bedroom_th_sensor.temperature_humidity_sensor.relative_humidity<30",
+          "condition": "time<23:00",
+          "action": "bedroom_humidifier.humidifier.on=true"
+        }
+      ]
+    },
+    "10. If the illumination in the second bedroom drops below 50 lux between 9 AM and 6 PM, open the curtain if it is closed.": {
+      "request_id": "HL_COND_010",
+      "home_id": "home_L",
+      "category": "Conditional TAP",
+      "request": "If the illumination in the second bedroom drops below 50 lux between 9 AM and 6 PM, open the curtain if it is closed.",
+      "explicit_tap": {
+        "trigger": "bedroom2_motion_sensor.motion_sensor.illumination<50",
+        "condition": "time>=09:00 and time<=18:00 and bedroom2_curtain.curtain.current_position==0",
+        "action": "bedroom2_curtain.curtain.motor_control=0"
+      },
+      "explicit_labels": {
+        "trigger": [
+          "bedroom2_motion_sensor.motion_sensor.illumination<50"
+        ],
+        "conditions": [
+          "time>=09:00",
+          "time<=18:00",
+          "bedroom2_curtain.curtain.current_position==0"
+        ],
+        "actions": [
+          "bedroom2_curtain.curtain.motor_control=0"
+        ]
+      },
+      "implicit_constraints": {
+        "dependencies": [],
+        "interlocks": []
+      },
+      "tap": {
+        "trigger": "bedroom2_motion_sensor.motion_sensor.illumination<50",
+        "condition": "time>=09:00 and time<=18:00 and bedroom2_curtain.curtain.current_position==0",
+        "action": "bedroom2_curtain.curtain.motor_control=0"
+      },
+      "acceptable_taps": [
+        {
+          "trigger": "bedroom2_motion_sensor.motion_sensor.illumination<50",
+          "condition": "time>09:00 and time<18:00 and bedroom2_curtain.curtain.current_position==0",
+          "action": "bedroom2_curtain.curtain.motor_control=0"
+        },
+        {
+          "trigger": "bedroom2_motion_sensor.motion_sensor.illumination<50",
+          "condition": "time>09:00 and time<=18:00 and bedroom2_curtain.curtain.current_position==0",
+          "action": "bedroom2_curtain.curtain.motor_control=0"
+        },
+        {
+          "trigger": "bedroom2_motion_sensor.motion_sensor.illumination<50",
+          "condition": "time>=09:00 and time<18:00 and bedroom2_curtain.curtain.current_position==0",
+          "action": "bedroom2_curtain.curtain.motor_control=0"
+        }
+      ],
+      "annotation_notes": "No implicit operational dependency or interlock is annotated for this category.",
+      "acceptable_explicit_taps": [
+        {
+          "trigger": "bedroom2_motion_sensor.motion_sensor.illumination<50",
+          "condition": "time>09:00 and time<18:00 and bedroom2_curtain.curtain.current_position==0",
+          "action": "bedroom2_curtain.curtain.motor_control=0"
+        },
+        {
+          "trigger": "bedroom2_motion_sensor.motion_sensor.illumination<50",
+          "condition": "time>09:00 and time<=18:00 and bedroom2_curtain.curtain.current_position==0",
+          "action": "bedroom2_curtain.curtain.motor_control=0"
+        },
+        {
+          "trigger": "bedroom2_motion_sensor.motion_sensor.illumination<50",
+          "condition": "time>=09:00 and time<18:00 and bedroom2_curtain.curtain.current_position==0",
+          "action": "bedroom2_curtain.curtain.motor_control=0"
+        }
+      ]
+    },
+    "11. When the front door opens between 6:30 PM and 9 PM, turn on the entrance light, turn on the living room main light at 60% brightness, and turn on the air purifier and set it to auto mode.": {
+      "request_id": "HL_MULTI_011",
+      "home_id": "home_L",
+      "category": "Multi-Action TAP",
+      "request": "When the front door opens between 6:30 PM and 9 PM, turn on the entrance light, turn on the living room main light at 60% brightness, and turn on the air purifier and set it to auto mode.",
+      "explicit_tap": {
+        "trigger": "event:entrance_door_sensor.magnet_sensor.open",
+        "condition": "time>=18:30 and time<=21:00",
+        "action": "entrance_light.light.on=true, living_room_main_light.light.on=true, living_room_main_light.light.brightness=60, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=0"
+      },
+      "explicit_labels": {
+        "trigger": [
+          "event:entrance_door_sensor.magnet_sensor.open"
+        ],
+        "conditions": [
+          "time>=18:30",
+          "time<=21:00"
+        ],
+        "actions": [
+          "entrance_light.light.on=true",
+          "living_room_main_light.light.on=true",
+          "living_room_main_light.light.brightness=60",
+          "living_room_air_purifier.air_purifier.on=true",
+          "living_room_air_purifier.air_purifier.mode=0"
+        ]
+      },
+      "implicit_constraints": {
+        "dependencies": [],
+        "interlocks": []
+      },
+      "tap": {
+        "trigger": "event:entrance_door_sensor.magnet_sensor.open",
+        "condition": "time>=18:30 and time<=21:00",
+        "action": "entrance_light.light.on=true, living_room_main_light.light.on=true, living_room_main_light.light.brightness=60, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=0"
+      },
+      "acceptable_taps": [
+        {
+          "trigger": "entrance_door_sensor.magnet_sensor.contact_state==false",
+          "condition": "time>18:30 and time<21:00",
+          "action": "entrance_light.light.on=true, living_room_main_light.light.on=true, living_room_main_light.light.brightness=60, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=0"
+        },
+        {
+          "trigger": "entrance_door_sensor.magnet_sensor.contact_state==false",
+          "condition": "time>18:30 and time<=21:00",
+          "action": "entrance_light.light.on=true, living_room_main_light.light.on=true, living_room_main_light.light.brightness=60, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=0"
+        },
+        {
+          "trigger": "entrance_door_sensor.magnet_sensor.contact_state==false",
+          "condition": "time>=18:30 and time<21:00",
+          "action": "entrance_light.light.on=true, living_room_main_light.light.on=true, living_room_main_light.light.brightness=60, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=0"
+        },
+        {
+          "trigger": "entrance_door_sensor.magnet_sensor.contact_state==false",
+          "condition": "time>=18:30 and time<=21:00",
+          "action": "entrance_light.light.on=true, living_room_main_light.light.on=true, living_room_main_light.light.brightness=60, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=0"
+        },
+        {
+          "trigger": "event:entrance_door_sensor.magnet_sensor.open",
+          "condition": "time>18:30 and time<21:00",
+          "action": "entrance_light.light.on=true, living_room_main_light.light.on=true, living_room_main_light.light.brightness=60, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=0"
+        },
+        {
+          "trigger": "event:entrance_door_sensor.magnet_sensor.open",
+          "condition": "time>18:30 and time<=21:00",
+          "action": "entrance_light.light.on=true, living_room_main_light.light.on=true, living_room_main_light.light.brightness=60, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=0"
+        },
+        {
+          "trigger": "event:entrance_door_sensor.magnet_sensor.open",
+          "condition": "time>=18:30 and time<21:00",
+          "action": "entrance_light.light.on=true, living_room_main_light.light.on=true, living_room_main_light.light.brightness=60, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=0"
+        }
+      ],
+      "annotation_notes": "No implicit operational dependency or interlock is annotated for this category.",
+      "acceptable_explicit_taps": [
+        {
+          "trigger": "entrance_door_sensor.magnet_sensor.contact_state==false",
+          "condition": "time>18:30 and time<21:00",
+          "action": "entrance_light.light.on=true, living_room_main_light.light.on=true, living_room_main_light.light.brightness=60, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=0"
+        },
+        {
+          "trigger": "entrance_door_sensor.magnet_sensor.contact_state==false",
+          "condition": "time>18:30 and time<=21:00",
+          "action": "entrance_light.light.on=true, living_room_main_light.light.on=true, living_room_main_light.light.brightness=60, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=0"
+        },
+        {
+          "trigger": "entrance_door_sensor.magnet_sensor.contact_state==false",
+          "condition": "time>=18:30 and time<21:00",
+          "action": "entrance_light.light.on=true, living_room_main_light.light.on=true, living_room_main_light.light.brightness=60, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=0"
+        },
+        {
+          "trigger": "entrance_door_sensor.magnet_sensor.contact_state==false",
+          "condition": "time>=18:30 and time<=21:00",
+          "action": "entrance_light.light.on=true, living_room_main_light.light.on=true, living_room_main_light.light.brightness=60, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=0"
+        },
+        {
+          "trigger": "event:entrance_door_sensor.magnet_sensor.open",
+          "condition": "time>18:30 and time<21:00",
+          "action": "entrance_light.light.on=true, living_room_main_light.light.on=true, living_room_main_light.light.brightness=60, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=0"
+        },
+        {
+          "trigger": "event:entrance_door_sensor.magnet_sensor.open",
+          "condition": "time>18:30 and time<=21:00",
+          "action": "entrance_light.light.on=true, living_room_main_light.light.on=true, living_room_main_light.light.brightness=60, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=0"
+        },
+        {
+          "trigger": "event:entrance_door_sensor.magnet_sensor.open",
+          "condition": "time>=18:30 and time<21:00",
+          "action": "entrance_light.light.on=true, living_room_main_light.light.on=true, living_room_main_light.light.brightness=60, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=0"
+        }
+      ]
+    },
+    "12. At 11:30 PM, if the master bedroom window is closed, turn off the master bedroom main light, turn on the bedside lamp at 15% brightness, close the bedroom curtain, turn on the air conditioner and set it to 26°C, and turn on the humidifier.": {
+      "request_id": "HL_MULTI_012",
+      "home_id": "home_L",
+      "category": "Multi-Action TAP",
+      "request": "At 11:30 PM, if the master bedroom window is closed, turn off the master bedroom main light, turn on the bedside lamp at 15% brightness, close the bedroom curtain, turn on the air conditioner and set it to 26°C, and turn on the humidifier.",
+      "explicit_tap": {
+        "trigger": "time==23:30",
+        "condition": "bedroom_window_sensor.magnet_sensor.contact_state==true",
+        "action": "bedroom_main_light.light.on=false, bedroom_beside_lamp.light.on=true, bedroom_beside_lamp.light.brightness=15, bedroom_curtain.curtain.motor_control=1, bedroom_aircondition.air_conditioner.on=true, bedroom_aircondition.air_conditioner.target_temperature=26, bedroom_humidifier.humidifier.on=true"
+      },
+      "explicit_labels": {
+        "trigger": [
+          "time==23:30"
+        ],
+        "conditions": [
+          "bedroom_window_sensor.magnet_sensor.contact_state==true"
+        ],
+        "actions": [
+          "bedroom_main_light.light.on=false",
+          "bedroom_beside_lamp.light.on=true",
+          "bedroom_beside_lamp.light.brightness=15",
+          "bedroom_curtain.curtain.motor_control=1",
+          "bedroom_aircondition.air_conditioner.on=true",
+          "bedroom_aircondition.air_conditioner.target_temperature=26",
+          "bedroom_humidifier.humidifier.on=true"
+        ]
+      },
+      "implicit_constraints": {
+        "dependencies": [],
+        "interlocks": []
+      },
+      "tap": {
+        "trigger": "time==23:30",
+        "condition": "bedroom_window_sensor.magnet_sensor.contact_state==true",
+        "action": "bedroom_main_light.light.on=false, bedroom_beside_lamp.light.on=true, bedroom_beside_lamp.light.brightness=15, bedroom_curtain.curtain.motor_control=1, bedroom_aircondition.air_conditioner.on=true, bedroom_aircondition.air_conditioner.target_temperature=26, bedroom_humidifier.humidifier.on=true"
+      },
+      "acceptable_taps": [
+        {
+          "trigger": "time==23:30",
+          "condition": "event:bedroom_window_sensor.magnet_sensor.close",
+          "action": "bedroom_main_light.light.on=false, bedroom_beside_lamp.light.on=true, bedroom_beside_lamp.light.brightness=15, bedroom_curtain.curtain.motor_control=1, bedroom_aircondition.air_conditioner.on=true, bedroom_aircondition.air_conditioner.target_temperature=26, bedroom_humidifier.humidifier.on=true"
+        }
+      ],
+      "annotation_notes": "No implicit operational dependency or interlock is annotated for this category.",
+      "acceptable_explicit_taps": [
+        {
+          "trigger": "time==23:30",
+          "condition": "event:bedroom_window_sensor.magnet_sensor.close",
+          "action": "bedroom_main_light.light.on=false, bedroom_beside_lamp.light.on=true, bedroom_beside_lamp.light.brightness=15, bedroom_curtain.curtain.motor_control=1, bedroom_aircondition.air_conditioner.on=true, bedroom_aircondition.air_conditioner.target_temperature=26, bedroom_humidifier.humidifier.on=true"
+        }
+      ]
+    },
+    "13. At 7:00 AM, open the master bedroom curtain, turn on the master bedroom main light at 50% brightness, turn off the air conditioner, and turn off the humidifier.": {
+      "request_id": "HL_MULTI_013",
+      "home_id": "home_L",
+      "category": "Multi-Action TAP",
+      "request": "At 7:00 AM, open the master bedroom curtain, turn on the master bedroom main light at 50% brightness, turn off the air conditioner, and turn off the humidifier.",
+      "explicit_tap": {
+        "trigger": "time==07:00",
+        "condition": "",
+        "action": "bedroom_curtain.curtain.motor_control=0, bedroom_main_light.light.on=true, bedroom_main_light.light.brightness=50, bedroom_aircondition.air_conditioner.on=false, bedroom_humidifier.humidifier.on=false"
+      },
+      "explicit_labels": {
+        "trigger": [
+          "time==07:00"
+        ],
+        "conditions": [],
+        "actions": [
+          "bedroom_curtain.curtain.motor_control=0",
+          "bedroom_main_light.light.on=true",
+          "bedroom_main_light.light.brightness=50",
+          "bedroom_aircondition.air_conditioner.on=false",
+          "bedroom_humidifier.humidifier.on=false"
+        ]
+      },
+      "implicit_constraints": {
+        "dependencies": [],
+        "interlocks": []
+      },
+      "tap": {
+        "trigger": "time==07:00",
+        "condition": "",
+        "action": "bedroom_curtain.curtain.motor_control=0, bedroom_main_light.light.on=true, bedroom_main_light.light.brightness=50, bedroom_aircondition.air_conditioner.on=false, bedroom_humidifier.humidifier.on=false"
+      },
+      "acceptable_taps": [],
+      "annotation_notes": "No implicit operational dependency or interlock is annotated for this category."
+    },
+    "14. When motion is detected in the study between 9 AM and 6 PM, turn on the main light at 80% brightness and 4300K, turn on the desk lamp in office mode, and turn on the air conditioner and set it to 26°C.": {
+      "request_id": "HL_MULTI_014",
+      "home_id": "home_L",
+      "category": "Multi-Action TAP",
+      "request": "When motion is detected in the study between 9 AM and 6 PM, turn on the main light at 80% brightness and 4300K, turn on the desk lamp in office mode, and turn on the air conditioner and set it to 26°C.",
+      "explicit_tap": {
+        "trigger": "event:study_motion_sensor.motion_sensor.motion_detected",
+        "condition": "time>=09:00 and time<=18:00",
+        "action": "study_main_light.light.on=true, study_main_light.light.brightness=80, study_main_light.light.color_temperature=4300, study_desk_lamp.light.on=true, study_desk_lamp.light.mode=5, study_air_conditioner.air_conditioner.on=true, study_air_conditioner.air_conditioner.target_temperature=26"
+      },
+      "explicit_labels": {
+        "trigger": [
+          "event:study_motion_sensor.motion_sensor.motion_detected"
+        ],
+        "conditions": [
+          "time>=09:00",
+          "time<=18:00"
+        ],
+        "actions": [
+          "study_main_light.light.on=true",
+          "study_main_light.light.brightness=80",
+          "study_main_light.light.color_temperature=4300",
+          "study_desk_lamp.light.on=true",
+          "study_desk_lamp.light.mode=5",
+          "study_air_conditioner.air_conditioner.on=true",
+          "study_air_conditioner.air_conditioner.target_temperature=26"
+        ]
+      },
+      "implicit_constraints": {
+        "dependencies": [],
+        "interlocks": []
+      },
+      "tap": {
+        "trigger": "event:study_motion_sensor.motion_sensor.motion_detected",
+        "condition": "time>=09:00 and time<=18:00",
+        "action": "study_main_light.light.on=true, study_main_light.light.brightness=80, study_main_light.light.color_temperature=4300, study_desk_lamp.light.on=true, study_desk_lamp.light.mode=5, study_air_conditioner.air_conditioner.on=true, study_air_conditioner.air_conditioner.target_temperature=26"
+      },
+      "acceptable_taps": [
+        {
+          "trigger": "event:study_motion_sensor.motion_sensor.motion_detected",
+          "condition": "time>09:00 and time<18:00",
+          "action": "study_main_light.light.on=true, study_main_light.light.brightness=80, study_main_light.light.color_temperature=4300, study_desk_lamp.light.on=true, study_desk_lamp.light.mode=5, study_air_conditioner.air_conditioner.on=true, study_air_conditioner.air_conditioner.target_temperature=26"
+        },
+        {
+          "trigger": "event:study_motion_sensor.motion_sensor.motion_detected",
+          "condition": "time>09:00 and time<=18:00",
+          "action": "study_main_light.light.on=true, study_main_light.light.brightness=80, study_main_light.light.color_temperature=4300, study_desk_lamp.light.on=true, study_desk_lamp.light.mode=5, study_air_conditioner.air_conditioner.on=true, study_air_conditioner.air_conditioner.target_temperature=26"
+        },
+        {
+          "trigger": "event:study_motion_sensor.motion_sensor.motion_detected",
+          "condition": "time>=09:00 and time<18:00",
+          "action": "study_main_light.light.on=true, study_main_light.light.brightness=80, study_main_light.light.color_temperature=4300, study_desk_lamp.light.on=true, study_desk_lamp.light.mode=5, study_air_conditioner.air_conditioner.on=true, study_air_conditioner.air_conditioner.target_temperature=26"
+        }
+      ],
+      "annotation_notes": "No implicit operational dependency or interlock is annotated for this category.",
+      "acceptable_explicit_taps": [
+        {
+          "trigger": "event:study_motion_sensor.motion_sensor.motion_detected",
+          "condition": "time>09:00 and time<18:00",
+          "action": "study_main_light.light.on=true, study_main_light.light.brightness=80, study_main_light.light.color_temperature=4300, study_desk_lamp.light.on=true, study_desk_lamp.light.mode=5, study_air_conditioner.air_conditioner.on=true, study_air_conditioner.air_conditioner.target_temperature=26"
+        },
+        {
+          "trigger": "event:study_motion_sensor.motion_sensor.motion_detected",
+          "condition": "time>09:00 and time<=18:00",
+          "action": "study_main_light.light.on=true, study_main_light.light.brightness=80, study_main_light.light.color_temperature=4300, study_desk_lamp.light.on=true, study_desk_lamp.light.mode=5, study_air_conditioner.air_conditioner.on=true, study_air_conditioner.air_conditioner.target_temperature=26"
+        },
+        {
+          "trigger": "event:study_motion_sensor.motion_sensor.motion_detected",
+          "condition": "time>=09:00 and time<18:00",
+          "action": "study_main_light.light.on=true, study_main_light.light.brightness=80, study_main_light.light.color_temperature=4300, study_desk_lamp.light.on=true, study_desk_lamp.light.mode=5, study_air_conditioner.air_conditioner.on=true, study_air_conditioner.air_conditioner.target_temperature=26"
+        }
+      ]
+    },
+    "15. When the TV starts playing in the living room between 7 PM and 10:30 PM, dim the main light to 40% brightness, turn on the floor lamp and set it to 3000K, close the living room curtain using the close command, and turn on the air purifier and set it to sleep mode.": {
+      "request_id": "HL_MULTI_015",
+      "home_id": "home_L",
+      "category": "Multi-Action TAP",
+      "request": "When the TV starts playing in the living room between 7 PM and 10:30 PM, dim the main light to 40% brightness, turn on the floor lamp and set it to 3000K, close the living room curtain using the close command, and turn on the air purifier and set it to sleep mode.",
+      "explicit_tap": {
+        "trigger": "living_room_tv.remote_control.state_playing==true",
+        "condition": "time>=19:00 and time<=22:30",
+        "action": "living_room_main_light.light.on=true, living_room_main_light.light.brightness=40, living_room_floor_lamp.light.on=true, living_room_floor_lamp.light.color_temperature=3000, living_room_curtain.curtain.motor_control=1, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=3"
+      },
+      "explicit_labels": {
+        "trigger": [
+          "living_room_tv.remote_control.state_playing==true"
+        ],
+        "conditions": [
+          "time>=19:00",
+          "time<=22:30"
+        ],
+        "actions": [
+          "living_room_main_light.light.on=true",
+          "living_room_main_light.light.brightness=40",
+          "living_room_floor_lamp.light.on=true",
+          "living_room_floor_lamp.light.color_temperature=3000",
+          "living_room_curtain.curtain.motor_control=1",
+          "living_room_air_purifier.air_purifier.on=true",
+          "living_room_air_purifier.air_purifier.mode=3"
+        ]
+      },
+      "implicit_constraints": {
+        "dependencies": [],
+        "interlocks": []
+      },
+      "tap": {
+        "trigger": "living_room_tv.remote_control.state_playing==true",
+        "condition": "time>=19:00 and time<=22:30",
+        "action": "living_room_main_light.light.on=true, living_room_main_light.light.brightness=40, living_room_floor_lamp.light.on=true, living_room_floor_lamp.light.color_temperature=3000, living_room_curtain.curtain.motor_control=1, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=3"
+      },
+      "acceptable_taps": [
+        {
+          "trigger": "living_room_tv.remote_control.state_playing==true",
+          "condition": "time>19:00 and time<22:30",
+          "action": "living_room_main_light.light.on=true, living_room_main_light.light.brightness=40, living_room_floor_lamp.light.on=true, living_room_floor_lamp.light.color_temperature=3000, living_room_curtain.curtain.motor_control=1, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=3"
+        },
+        {
+          "trigger": "living_room_tv.remote_control.state_playing==true",
+          "condition": "time>19:00 and time<=22:30",
+          "action": "living_room_main_light.light.on=true, living_room_main_light.light.brightness=40, living_room_floor_lamp.light.on=true, living_room_floor_lamp.light.color_temperature=3000, living_room_curtain.curtain.motor_control=1, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=3"
+        },
+        {
+          "trigger": "living_room_tv.remote_control.state_playing==true",
+          "condition": "time>=19:00 and time<22:30",
+          "action": "living_room_main_light.light.on=true, living_room_main_light.light.brightness=40, living_room_floor_lamp.light.on=true, living_room_floor_lamp.light.color_temperature=3000, living_room_curtain.curtain.motor_control=1, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=3"
+        }
+      ],
+      "annotation_notes": "No implicit operational dependency or interlock is annotated for this category.",
+      "acceptable_explicit_taps": [
+        {
+          "trigger": "living_room_tv.remote_control.state_playing==true",
+          "condition": "time>19:00 and time<22:30",
+          "action": "living_room_main_light.light.on=true, living_room_main_light.light.brightness=40, living_room_floor_lamp.light.on=true, living_room_floor_lamp.light.color_temperature=3000, living_room_curtain.curtain.motor_control=1, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=3"
+        },
+        {
+          "trigger": "living_room_tv.remote_control.state_playing==true",
+          "condition": "time>19:00 and time<=22:30",
+          "action": "living_room_main_light.light.on=true, living_room_main_light.light.brightness=40, living_room_floor_lamp.light.on=true, living_room_floor_lamp.light.color_temperature=3000, living_room_curtain.curtain.motor_control=1, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=3"
+        },
+        {
+          "trigger": "living_room_tv.remote_control.state_playing==true",
+          "condition": "time>=19:00 and time<22:30",
+          "action": "living_room_main_light.light.on=true, living_room_main_light.light.brightness=40, living_room_floor_lamp.light.on=true, living_room_floor_lamp.light.color_temperature=3000, living_room_curtain.curtain.motor_control=1, living_room_air_purifier.air_purifier.on=true, living_room_air_purifier.air_purifier.mode=3"
+        }
+      ]
+    },
+    "16. When the kitchen cooker starts cooking, set the kitchen range hood to high.": {
+      "request_id": "HL_CA_016",
+      "home_id": "home_L",
+      "category": "Constraint-Aware TAP",
+      "request": "When the kitchen cooker starts cooking, set the kitchen range hood to high.",
+      "explicit_tap": {
+        "trigger": "kitchen_cooker.kitchen_stove.status==2",
+        "condition": "",
+        "action": "kitchen_hood.hood.fan_level=1"
+      },
+      "explicit_labels": {
+        "trigger": [
+          "kitchen_cooker.kitchen_stove.status==2"
+        ],
+        "conditions": [],
+        "actions": [
+          "kitchen_hood.hood.fan_level=1"
+        ]
+      },
+      "implicit_constraints": {
+        "dependencies": [
+          {
+            "atom": "kitchen_hood.hood.on=true",
+            "rationale": "Range hood fan level is executable only after the hood is powered on."
+          }
+        ],
+        "interlocks": []
+      },
+      "tap": {
+        "trigger": "kitchen_cooker.kitchen_stove.status==2",
+        "condition": "",
+        "action": "kitchen_hood.hood.on=true, kitchen_hood.hood.fan_level=1"
+      },
+      "acceptable_taps": [],
+      "annotation_notes": "Full executable TAP adds implicit operational constraints separated from explicit user intent."
+    },
+    "17. When the TV starts playing in the living room, dim the main light brightness to 60%.": {
+      "request_id": "HL_CA_017",
+      "home_id": "home_L",
+      "category": "Constraint-Aware TAP",
+      "request": "When the TV starts playing in the living room, dim the main light brightness to 60%.",
+      "explicit_tap": {
+        "trigger": "living_room_tv.remote_control.state_playing==true",
+        "condition": "",
+        "action": "living_room_main_light.light.brightness=60"
+      },
+      "explicit_labels": {
+        "trigger": [
+          "living_room_tv.remote_control.state_playing==true"
+        ],
+        "conditions": [],
+        "actions": [
+          "living_room_main_light.light.brightness=60"
+        ]
+      },
+      "implicit_constraints": {
+        "dependencies": [
+          {
+            "atom": "living_room_main_light.light.on=true",
+            "rationale": "Brightness control requires the light to be on."
+          }
+        ],
+        "interlocks": []
+      },
+      "tap": {
+        "trigger": "living_room_tv.remote_control.state_playing==true",
+        "condition": "",
+        "action": "living_room_main_light.light.on=true, living_room_main_light.light.brightness=60"
+      },
+      "acceptable_taps": [],
+      "annotation_notes": "Full executable TAP adds implicit operational constraints separated from explicit user intent."
+    },
+    "18. If the humidity in the master bedroom drops below 35%, set the humidifier target humidity to 50%.": {
+      "request_id": "HL_CA_018",
+      "home_id": "home_L",
+      "category": "Constraint-Aware TAP",
+      "request": "If the humidity in the master bedroom drops below 35%, set the humidifier target humidity to 50%.",
+      "explicit_tap": {
+        "trigger": "bedroom_th_sensor.temperature_humidity_sensor.relative_humidity<35",
+        "condition": "",
+        "action": "bedroom_humidifier.humidifier.target_humidity=50"
+      },
+      "explicit_labels": {
+        "trigger": [
+          "bedroom_th_sensor.temperature_humidity_sensor.relative_humidity<35"
+        ],
+        "conditions": [],
+        "actions": [
+          "bedroom_humidifier.humidifier.target_humidity=50"
+        ]
+      },
+      "implicit_constraints": {
+        "dependencies": [
+          {
+            "atom": "bedroom_humidifier.humidifier.on=true",
+            "rationale": "Target humidity setting requires the humidifier to be on."
+          }
+        ],
+        "interlocks": []
+      },
+      "tap": {
+        "trigger": "bedroom_th_sensor.temperature_humidity_sensor.relative_humidity<35",
+        "condition": "",
+        "action": "bedroom_humidifier.humidifier.on=true, bedroom_humidifier.humidifier.target_humidity=50"
+      },
+      "acceptable_taps": [],
+      "annotation_notes": "Full executable TAP adds implicit operational constraints separated from explicit user intent."
+    },
+    "19. When the temperature in the second bedroom rises above 28°C, set the AC to cooling mode at 25°C.": {
+      "request_id": "HL_CA_019",
+      "home_id": "home_L",
+      "category": "Constraint-Aware TAP",
+      "request": "When the temperature in the second bedroom rises above 28°C, set the AC to cooling mode at 25°C.",
+      "explicit_tap": {
+        "trigger": "bedroom2_th_sensor.temperature_humidity_sensor.temperature>28",
+        "condition": "",
+        "action": "bedroom2_air_conditioner.air_conditioner.mode=2, bedroom2_air_conditioner.air_conditioner.target_temperature=25"
+      },
+      "explicit_labels": {
+        "trigger": [
+          "bedroom2_th_sensor.temperature_humidity_sensor.temperature>28"
+        ],
+        "conditions": [],
+        "actions": [
+          "bedroom2_air_conditioner.air_conditioner.mode=2",
+          "bedroom2_air_conditioner.air_conditioner.target_temperature=25"
+        ]
+      },
+      "implicit_constraints": {
+        "dependencies": [
+          {
+            "atom": "bedroom2_air_conditioner.air_conditioner.on=true",
+            "rationale": "Mode and target-temperature settings require the air conditioner to be on."
+          }
+        ],
+        "interlocks": [
+          {
+            "atom": "bedroom2_window_sensor.magnet_sensor.contact_state==true",
+            "rationale": "Air conditioner should run only when the bedroom window is closed."
+          }
+        ]
+      },
+      "tap": {
+        "trigger": "bedroom2_th_sensor.temperature_humidity_sensor.temperature>28",
+        "condition": "bedroom2_window_sensor.magnet_sensor.contact_state==true",
+        "action": "bedroom2_air_conditioner.air_conditioner.on=true, bedroom2_air_conditioner.air_conditioner.mode=2, bedroom2_air_conditioner.air_conditioner.target_temperature=25"
+      },
+      "acceptable_taps": [
+        {
+          "trigger": "bedroom2_th_sensor.temperature_humidity_sensor.temperature>28",
+          "condition": "event:bedroom2_window_sensor.magnet_sensor.close",
+          "action": "bedroom2_air_conditioner.air_conditioner.on=true, bedroom2_air_conditioner.air_conditioner.mode=2, bedroom2_air_conditioner.air_conditioner.target_temperature=25"
+        }
+      ],
+      "annotation_notes": "Full executable TAP adds implicit operational constraints separated from explicit user intent."
+    },
+    "20. When the temperature in the bathroom drops below 18°C, set the bathroom heater to heat mode.": {
+      "request_id": "HL_CA_020",
+      "home_id": "home_L",
+      "category": "Constraint-Aware TAP",
+      "request": "When the temperature in the bathroom drops below 18°C, set the bathroom heater to heat mode.",
+      "explicit_tap": {
+        "trigger": "bathroom_th_sensor.temperature_humidity_sensor.temperature<18",
+        "condition": "",
+        "action": "bathroom_heater.ptc_bath_heater.mode=18"
+      },
+      "explicit_labels": {
+        "trigger": [
+          "bathroom_th_sensor.temperature_humidity_sensor.temperature<18"
+        ],
+        "conditions": [],
+        "actions": [
+          "bathroom_heater.ptc_bath_heater.mode=18"
+        ]
+      },
+      "implicit_constraints": {
+        "dependencies": [],
+        "interlocks": [
+          {
+            "atom": "bathroom_door_sensor.magnet_sensor.contact_state==true",
+            "rationale": "Bathroom heater heat mode should run only when the bathroom door is closed."
+          }
+        ]
+      },
+      "tap": {
+        "trigger": "bathroom_th_sensor.temperature_humidity_sensor.temperature<18",
+        "condition": "bathroom_door_sensor.magnet_sensor.contact_state==true",
+        "action": "bathroom_heater.ptc_bath_heater.mode=18"
+      },
+      "acceptable_taps": [
+        {
+          "trigger": "bathroom_th_sensor.temperature_humidity_sensor.temperature<18",
+          "condition": "event:bathroom_door_sensor.magnet_sensor.close",
+          "action": "bathroom_heater.ptc_bath_heater.mode=18"
+        }
+      ],
+      "annotation_notes": "Full executable TAP adds implicit operational constraints separated from explicit user intent."
+    }
+  }
+}
