@@ -1,34 +1,58 @@
-# Home TAP Benchmark (Anonymous Artifact)
+# KGIoT Artifact
 
-> Anonymous benchmark artifact for double-blind review.
+> Benchmark, evaluation scripts, and implementation specifications for the KGIoT paper.
 
-This repository contains the complete evaluation benchmark for natural-language smart-home **Trigger-Action Program (TAP)** generation used in the accompanying paper. The benchmark has **60 requests** across three simulated homes (`home_L`, `home_M`, `home_S`), with executable ground truth, explicit/implicit constraint annotations, scoring scripts, and construction documentation.
+This repository (**KGIoT-artifact**) contains everything needed to **audit fair comparison** and **reproduce scoring** for natural-language smart-home **Trigger-Action Program (TAP)** generation:
+
+- **60 benchmark requests** across three simulated homes (`home_L`, `home_M`, `home_S`)
+- Executable ground truth with explicit/implicit constraint decomposition
+- Offline scoring scripts
+- **Exact baseline implementation details** (prompts, metadata schema, LLM settings, refinement loops, interaction policy, TAP-format adaptation)
 
 ## Contents
 
 ```
-home-tap-benchmark/
+KGIoT-artifact/
+├── README.md
 ├── data/
-│   ├── ground_truth_home_L.json      # 20 requests + labels
-│   ├── ground_truth_home_M.json
-│   ├── ground_truth_home_S.json
+│   ├── ground_truth_home_{L,M,S}.json
 │   └── environments/
-│       ├── home_L_graph_index.json   # device/capability inventory
-│       ├── home_M_graph_index.json
-│       └── home_S_graph_index.json
+│       └── home_*_graph_index.json
 ├── docs/
-│   ├── ANNOTATION_GUIDELINES.md      # annotation + scoring rules
-│   └── CONSTRUCTION_PROTOCOL.md      # how the benchmark was built
+│   ├── ANNOTATION_GUIDELINES.md
+│   ├── CONSTRUCTION_PROTOCOL.md
+│   └── IMPLEMENTATION_DETAILS.md    ← baseline comparison protocol
 ├── domain_knowledge/
-│   └── GENERAL_DOMAIN_KNOWLEDGE.txt  # +DK knowledge-parity template
+│   └── GENERAL_DOMAIN_KNOWLEDGE.txt ← +DK knowledge-parity template
+├── prompts/                         ← verbatim LLM prompts per method
+│   ├── README.md
+│   ├── shared_tap_format.md
+│   ├── vanilla.md
+│   ├── chatiot.md
+│   ├── sasha.md
+│   ├── homegenii.md
+│   ├── autoiot.md
+│   └── kgiot.md
 ├── scripts/
 │   ├── benchmark_utils.py
 │   ├── score_outputs.py
 │   └── summarize_results.py
 └── examples/
-    ├── preview.csv                   # 60-request overview
-    └── sample_submission.jsonl       # scoring input format
+    ├── preview.csv
+    ├── sample_submission.jsonl
+    └── metadata_schema_example.json
 ```
+
+## For Reviewers: Implementation Details
+
+Reviewer requests for exact baseline specifications are addressed in:
+
+- **[`docs/IMPLEMENTATION_DETAILS.md`](docs/IMPLEMENTATION_DETAILS.md)** — shared protocol, fairness summary, per-method pipelines, adaptation notes
+- **[`prompts/`](prompts/)** — full verbatim prompt templates for Vanilla, ChatIoT, Sasha, HomeGenii, AutoIoT, and KGIoT
+- **[`domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt`](domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt)** — knowledge-parity (+DK) plain-text rules
+- **[`examples/metadata_schema_example.json`](examples/metadata_schema_example.json)** — device metadata schema example
+
+**Note:** This artifact publishes prompts and protocol specifications. It does **not** include the Home Assistant integration source code; reviewers did not require baseline code release.
 
 ## Request Categories (RC1–RC4)
 
@@ -51,7 +75,7 @@ The evaluator reports separate metrics to disentangle user-intent satisfaction f
 - **Platform validity**: well-formed TAP referencing real home devices/capabilities and deployable on the target platform.
 - **Grounding precision/recall** (optional): device- and capability-level precision/recall when a method exposes retrieved context.
 
-See `docs/ANNOTATION_GUIDELINES.md` for full scoring rules.
+See [`docs/ANNOTATION_GUIDELINES.md`](docs/ANNOTATION_GUIDELINES.md) for full scoring rules.
 
 ## Quick Start (No Home Assistant Required)
 
@@ -114,12 +138,12 @@ Each entry in `data/ground_truth_home_*.json` contains:
 | `tap` | Full executable ground truth |
 | `acceptable_taps` | Semantically equivalent variants |
 
-A full schema example is in `docs/ANNOTATION_GUIDELINES.md`.
+A full schema example is in [`docs/ANNOTATION_GUIDELINES.md`](docs/ANNOTATION_GUIDELINES.md).
 
 ## Knowledge-Parity (+DK) Baselines
 
-For fair comparison on constraint-aware requests, baselines may be evaluated with the plain-text domain rules in `domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt` injected into their prompts. This provides template-level operational guidance without giving per-request oracle answers or a knowledge graph.
+For fair comparison on constraint-aware requests, baselines may be evaluated with the plain-text domain rules in [`domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt`](domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt) injected into their prompts. This provides template-level operational guidance without giving per-request oracle answers or a knowledge graph. Prompt injection points are documented in [`prompts/`](prompts/).
 
 ## License
 
-This benchmark artifact is released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See `LICENSE`.
+This artifact is released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See `LICENSE`.
