@@ -58,10 +58,6 @@ Your response should be a json object with exactly these fields:
   "Thought": "<brief reasoning>",
   "property_list": ["id.service.property", "..."]
 }
-Strict constraints:
-1. "Thought" must be <= 8 words.
-2. Do NOT explain process, only concise conclusion.
-3. No markdown/code fence or any extra fields/text.
 ```
 
 ### System (+DK variant)
@@ -127,15 +123,6 @@ Format rules:
 
 # Output
 Your response will be a json {"Thought": <Thought>, "TAP": <TAP>}.
-Strict constraints:
-1. "Thought" must be <= 12 words, one sentence only.
-2. Do NOT include step-by-step reasoning, alternatives, or self-reflection.
-3. If uncertain, set "Thought" to a short phrase like "insufficient properties" and still return best-effort TAP.
-4. TAP must be an object with string fields only: "trigger", "condition", "action".
-5. "trigger" and "action" must be comma-separated strings, never arrays/lists.
-6. "condition" must be a string (empty string allowed), never an array/list.
-7. The output TAP must follow all Format rules above.
-8. No markdown/code fence or any extra fields/text.
 ```
 
 ### System (+DK variant)
@@ -200,14 +187,6 @@ Format checks:
 
 # Output
 Your response will be a json {"Thought": <Thought>, "TAP": <TAP>}.
-Strict constraints:
-1. "Thought" must be <= 10 words, one sentence only.
-2. Do NOT include step-by-step reasoning, alternatives, or self-reflection.
-3. TAP must be an object with string fields only: "trigger", "condition", "action".
-4. "trigger" and "action" must be comma-separated strings, never arrays/lists.
-5. "condition" must be a string (empty string allowed), never an array/list.
-6. The returned TAP must pass all Format checks above.
-7. No markdown/code fence or any extra fields/text.
 ```
 
 ### System (+DK variant)
