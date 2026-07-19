@@ -52,24 +52,45 @@ Given a user request and a device list, generate a TAP in JSON format:
 }
 ```
 
-## System message (+DK variant)
+## +DK variant (`vanilla_dk_gpt4o`)
 
-Same as above, plus this rule in the Rules list:
+See [`domain_knowledge_injection.md`](domain_knowledge_injection.md) for the verbatim `${domain_knowledge}` block and injection map.
+
+**Changes vs standard:** system adds one rule; user appends `---Domain_knowledge---` as the **last section** (after device context).
+
+### System (+DK)
 
 ```
+You are an assistant that translates natural language requests into trigger-action programs (TAP) for smart homes.
+
+A TAP consists of three parts:
+- trigger: the event that starts the automation
+- condition: optional constraints
+- action: the operation to perform
+
+Each element should be represented as:
+id.service.property<op>value
+
+Rules:
+- Use "==", "<", ">", ">=", "<=" for trigger and condition
+- Use "=" for action
+- Multiple actions are separated by ","
+- Condition can be empty ""
+- Event trigger format: "event:id.service.event_name"
+- Service action format: "call_action:id.service.action_name"
+- Property action format: "id.service.property=value"
 - Apply domain knowledge when relevant: dependencies go in "action"; interlocks go in "condition"
+
+Given a user request, device context, and domain knowledge, generate a TAP in JSON format:
+
+{
+  "trigger": "...",
+  "condition": "...",
+  "action": "..."
+}
 ```
 
-## User message (standard)
-
-```
----User request---
-${user_request}
----HA raw device context---
-${ha_raw_device_context}
-```
-
-## User message (+DK variant)
+### User (+DK)
 
 ```
 ---User request---
@@ -80,7 +101,16 @@ ${ha_raw_device_context}
 ${domain_knowledge}
 ```
 
-`${domain_knowledge}` is the verbatim text in `../domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt`.
+`${domain_knowledge}` = verbatim text in [`domain_knowledge_injection.md` § Verbatim block](domain_knowledge_injection.md#verbatim-domain-knowledge-block) (file: `../domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt`).
+
+## User message (standard)
+
+```
+---User request---
+${user_request}
+---HA raw device context---
+${ha_raw_device_context}
+```
 
 ## Adaptation note
 

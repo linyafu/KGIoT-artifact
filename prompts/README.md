@@ -1,6 +1,6 @@
 # Prompt Templates
 
-This directory contains the **exact prompt templates** used in our paper experiments for each evaluated method. Template variables (`${user_request}`, `${device_list}`, etc.) are substituted at runtime with live benchmark inputs.
+This directory contains the **exact prompt templates** used in our paper experiments. Template variables (`${user_request}`, `${device_list}`, etc.) are substituted at runtime.
 
 ## Files
 
@@ -13,15 +13,20 @@ This directory contains the **exact prompt templates** used in our paper experim
 | `autoiot.md` | AutoIoT | 1–3 (generate + up to 2 repairs) |
 | `kgiot.md` | KGIoT (proposed) | 2 (parse, plan) |
 | `shared_tap_format.md` | Shared TAP syntax rules | — |
+| **`domain_knowledge_injection.md`** | **+DK verbatim block & injection map** | — |
 
 ## Knowledge-parity (+DK) variants
 
-For `+DK` ablations, inject the verbatim block in `../domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt`. Each prompt file documents where the block is appended (system vs user message). **KGIoT does not use this block.**
+**Do not skip** [`domain_knowledge_injection.md`](domain_knowledge_injection.md). It contains:
+
+1. The **full verbatim** `${domain_knowledge}` text (same as `../domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt`)
+2. A **table** of which stage injects +DK in **system** vs **user** message
+3. An **expanded user-message example** showing exactly where `---Domain_knowledge---` appears
+
+Each baseline prompt file lists **complete +DK system and user templates** (not “same as standard, plus one line”). **KGIoT does not use +DK.**
 
 ## What is not duplicated here
 
-- **Runtime device context** (`all_context` JSON per home) — see `examples/metadata_schema_example.json` and `data/environments/`.
-- **KGIoT subgraph text** (`${kg_subgraph}`) — generated per request from the recalled subgraph.
-- **HomeGenii retrieved rules** — selected per request from a rulebase derived from HomeGenii `Enhanced TAP.txt`.
-
-These are dynamic inputs, not static prompts.
+- **Runtime device context** — see `examples/metadata_schema_example.json` and `data/environments/`.
+- **KGIoT subgraph text** (`${kg_subgraph}`) — generated per request.
+- **HomeGenii retrieved rules** — selected per request from Enhanced-TAP-derived rulebase.

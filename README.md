@@ -48,7 +48,8 @@ KGIoT-artifact/
 Reviewer requests for exact baseline specifications are addressed in:
 
 - **[`docs/IMPLEMENTATION_DETAILS.md`](docs/IMPLEMENTATION_DETAILS.md)** — shared protocol, fairness summary, per-method pipelines, adaptation notes
-- **[`prompts/`](prompts/)** — full verbatim prompt templates for Vanilla, ChatIoT, Sasha, HomeGenii, AutoIoT, and KGIoT
+- **[`prompts/domain_knowledge_injection.md`](prompts/domain_knowledge_injection.md)** — +DK verbatim block, injection map, expanded user-message example
+- **[`prompts/`](prompts/)** — full standard and +DK prompt templates per method
 - **[`domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt`](domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt)** — knowledge-parity (+DK) plain-text rules
 - **[`examples/metadata_schema_example.json`](examples/metadata_schema_example.json)** — device metadata schema example
 

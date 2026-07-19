@@ -86,6 +86,8 @@ ${device_list}
 
 ## Stage 3 — Plan TAP
 
+**+DK applies only to this stage.** Clarify and filter stages use the standard prompts above with **no** domain knowledge. See [`domain_knowledge_injection.md`](domain_knowledge_injection.md).
+
 ### System (standard)
 
 See `shared_tap_format.md` for TAP format rules. Plan system message:
@@ -120,10 +122,34 @@ Output strict JSON object only:
 
 ### System (+DK variant)
 
-Same as standard, with this line before the output block:
-
 ```
+You generate a TAP automation using only provided relevant devices.
+
+The format of TAP is {"trigger": <trigger>, "condition": <condition>, "action": <action>}.
+A trigger is either (a) "event:id.service.property" for a discrete event capability, or (b) "id.service.property<op><value>" for a state/comparison trigger.
+Conditions use "id.service.property<op><value>" or "time<op>HH:MM".
+Actions use "id.service.property=<value>" or "call_action:id.service.action_name" for service actions.
+In trigger and action, elements are separated by ",".
+In condition, elements are combined using "&&", "||", "and", "or", and "()".
+
+Format rules:
+1. Use only complete capability paths from the provided device context, in "id.service.property" form. Do not invent, shorten, or rename properties.
+2. Trigger and condition comparisons must use "==", ">", "<", ">=", or "<=". Never use a single "=" in trigger or condition.
+3. Action assignments must use a single "=".
+4. For clock-time guards, use the "time<op>HH:MM" schema in the condition field.
+5. Numeric configuration properties should receive numeric values. Power control should use the available power-control property.
+6. Discrete event triggers must use "event:id.service.property".
+7. Service-level actions may use "call_action:id.service.action_name" when available in context.
+8. Include discrete event capabilities from context when they are relevant trigger candidates.
+
 Apply domain knowledge when relevant: dependencies go in "action"; interlocks go in "condition".
+
+Output strict JSON object only:
+{
+  "trigger": "...",
+  "condition": "...",
+  "action": "..."
+}
 ```
 
 ### User (standard)
@@ -145,6 +171,8 @@ ${relevant_device_context}
 ---Domain_knowledge---
 ${domain_knowledge}
 ```
+
+`${domain_knowledge}` = verbatim block in [`domain_knowledge_injection.md`](domain_knowledge_injection.md#verbatim-domain-knowledge-block). Injected as the **last section** of the user message, after `---Relevant device context---`.
 
 ## Adaptation note
 

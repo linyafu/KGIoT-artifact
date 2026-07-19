@@ -46,4 +46,4 @@ Format rules:
 
 ## Knowledge-parity (+DK) injection
 
-When evaluating `+DK` variants, append the plain-text block in `../domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt` to the user message (or system message, depending on method). KGIoT does **not** use this block; it uses structured KG edges instead.
+When evaluating `+DK` variants, append the plain-text block documented in [`domain_knowledge_injection.md`](domain_knowledge_injection.md) under `---Domain_knowledge---` in the **user message** (see per-method templates). KGIoT does **not** use this block.

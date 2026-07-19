@@ -8,8 +8,8 @@ This document specifies the **exact experimental setup** used to compare KGIoT a
 
 | Content | Location |
 |---------|----------|
-| Verbatim prompt templates | [`../prompts/`](../prompts/) |
-| Knowledge-parity (+DK) text block | [`../domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt`](../domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt) |
+| Verbatim prompt templates | [`../prompts/`](../prompts/) — see [`../prompts/domain_knowledge_injection.md`](../prompts/domain_knowledge_injection.md) for +DK |
+| Knowledge-parity (+DK) text block | [`../domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt`](../domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt) (also reproduced in `prompts/domain_knowledge_injection.md`) |
 | Device metadata example | [`../examples/metadata_schema_example.json`](../examples/metadata_schema_example.json) |
 | Home inventories (capability indices) | [`../data/environments/`](../data/environments/) |
 | Scoring rules | [`ANNOTATION_GUIDELINES.md`](ANNOTATION_GUIDELINES.md) |
@@ -193,7 +193,13 @@ Detailed prompts are in [`../prompts/`](../prompts/). Below is a compact specifi
 
 ## 6. Knowledge-Parity (+DK) Setting
 
-For `+DK` runs, the block in [`../domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt`](../domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt) is injected into baseline prompts. It provides **template-level** operational guidance (power-on dependencies, window interlocks, value semantics)—not per-request oracle TAP atoms and not a knowledge graph.
+For `+DK` runs, the block in [`../domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt`](../domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt) is substituted for `${domain_knowledge}` in user messages under the `---Domain_knowledge---` section.
+
+**Full injection map (which stage, system vs user, expanded example):** [`../prompts/domain_knowledge_injection.md`](../prompts/domain_knowledge_injection.md)
+
+**Complete +DK system/user templates per method:** [`../prompts/`](../prompts/) (`vanilla.md`, `chatiot.md`, etc.).
+
+The block provides **template-level** operational guidance (power-on dependencies, window interlocks, value semantics)—not per-request oracle TAP atoms and not a knowledge graph.
 
 KGIoT is **not** evaluated with this injected block; it uses structured KG grounding instead.
 

@@ -71,6 +71,8 @@ Return ONLY valid compact JSON: {"primary_goal":"<short goal>","entities":["enti
 
 ## Stage 2 — Generate TAP
 
+**+DK applies only to this stage.** Goal/entity recognizer has **no** domain knowledge. See [`domain_knowledge_injection.md`](domain_knowledge_injection.md).
+
 ### System (standard)
 
 ```
@@ -109,10 +111,41 @@ Output strict JSON object only:
 
 ### System (+DK variant)
 
-Adds Input item 4 (Domain knowledge) and line before output:
-
 ```
+You are HomeGenii adapted for structured TAP generation in Home Assistant.
+
+You receive:
+1. User request
+2. Retrieved expert automation examples (compressed)
+3. Current home device context
+4. Domain knowledge (dependency and interlock rules)
+
+Your job is to generate one executable TAP for the current home using only devices/capabilities in the context.
+
+The format of TAP is {"trigger": <trigger>, "condition": <condition>, "action": <action>}.
+A trigger is either (a) "event:id.service.property" for a discrete event capability, or (b) "id.service.property<op><value>" for a state/comparison trigger.
+Conditions use "id.service.property<op><value>" or "time<op>HH:MM".
+Actions use "id.service.property=<value>" or "call_action:id.service.action_name" for service actions.
+In trigger and action, elements are separated by ",".
+In condition, elements are combined using "&&", "||", "and", "or", and "()".
+
+Format rules:
+1. Use only complete capability paths from the provided device context, in "id.service.property" form.
+2. Trigger and condition comparisons must use "==", ">", "<", ">=", or "<=".
+3. Action assignments must use a single "=".
+4. For clock-time guards, use the "time<op>HH:MM" schema in the condition field.
+5. Discrete event triggers must use "event:id.service.property".
+6. Do not output python_script, YAML automation, or procedural code. Output TAP JSON only.
+7. Retrieved expert rules (R0, R1, ...) are inspiration for automation intent, not executable code to copy verbatim.
+
 Apply domain knowledge when relevant: dependencies go in "action"; interlocks go in "condition".
+
+Output strict JSON object only:
+{
+  "trigger": "...",
+  "condition": "...",
+  "action": "..."
+}
 ```
 
 ### User (standard)
@@ -138,6 +171,8 @@ ${device_context}
 ---Domain_knowledge---
 ${domain_knowledge}
 ```
+
+`${domain_knowledge}` = verbatim block in [`domain_knowledge_injection.md`](domain_knowledge_injection.md#verbatim-domain-knowledge-block). Injected as the **last section** of the user message, after `---Home device context---`.
 
 ## Adaptation note
 
