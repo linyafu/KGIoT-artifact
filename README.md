@@ -1,8 +1,10 @@
-# KGIoT Artifact
+# KGIoT: Benchmark and Evaluation Resources
 
-> Benchmark, evaluation scripts, and implementation specifications for the KGIoT paper.
+> Benchmark, evaluation scripts, prompts, and implementation specifications for **KGIoT: Grounding LLM Agents in Actionable Spaces for Reliable Smart Home Automation**.
 
-This repository (**KGIoT-artifact**) contains everything needed to **audit fair comparison** and **reproduce scoring** for natural-language smart-home **Trigger-Action Program (TAP)** generation:
+**Authors:** Linya Fu, Leming Shen, and Yuanqing Zheng, The Hong Kong Polytechnic University.
+
+This repository (**KGIoT-artifact**) provides benchmark data, offline scoring tools, and documented experimental protocols for natural-language smart-home **Trigger-Action Program (TAP)** generation:
 
 - **60 benchmark requests** across three simulated homes (`home_L`, `home_M`, `home_S`)
 - Executable ground truth with explicit/implicit constraint decomposition
@@ -43,9 +45,9 @@ KGIoT-artifact/
     └── metadata_schema_example.json
 ```
 
-## For Reviewers: Implementation Details
+## Implementation and Reproducibility
 
-Reviewer requests for exact baseline specifications are addressed in:
+The experimental protocol and method specifications are documented in:
 
 - **[`docs/IMPLEMENTATION_DETAILS.md`](docs/IMPLEMENTATION_DETAILS.md)** — shared protocol, fairness summary, per-method pipelines, adaptation notes
 - **[`prompts/domain_knowledge_injection.md`](prompts/domain_knowledge_injection.md)** — +DK verbatim block, injection map, expanded user-message example
@@ -53,7 +55,7 @@ Reviewer requests for exact baseline specifications are addressed in:
 - **[`domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt`](domain_knowledge/GENERAL_DOMAIN_KNOWLEDGE.txt)** — knowledge-parity (+DK) plain-text rules
 - **[`examples/metadata_schema_example.json`](examples/metadata_schema_example.json)** — device metadata schema example
 
-**Note:** This artifact publishes prompts and protocol specifications. It does **not** include the Home Assistant integration source code; reviewers did not require baseline code release.
+**Scope:** This repository includes benchmark data, offline scoring scripts, prompts, and protocol specifications. It does **not** include the Home Assistant integration or full baseline implementations. The Quick Start reproduces scoring for the supplied example outputs; it does not run KGIoT or the baselines end to end.
 
 ## Request Categories (RC1–RC4)
 
