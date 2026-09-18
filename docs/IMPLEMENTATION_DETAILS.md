@@ -1,8 +1,8 @@
 # Implementation Details for Baseline Comparison
 
-This document specifies the **exact experimental setup** used to compare KGIoT against Vanilla, ChatIoT, Sasha, HomeGenii, and AutoIoT on the Home TAP benchmark. It is intended to address reproducibility and **fair-comparison** concerns: all methods target the same TAP task, share the same LLM decoding settings, and are evaluated under the same single-turn protocol.
+This document specifies the **exact experimental setup** used to compare KGIoT against Vanilla, ChatIoT, Sasha, HomeGenii, and AutoIoT on the Home TAP benchmark. It documents the shared protocol and method adaptations for reproducibility: all methods target the same TAP task, share the same LLM decoding settings, and are evaluated under the same single-turn protocol.
 
-> **Note:** Reviewers asked for implementation details (prompts, metadata schema, LLM settings, refinement loops, interaction policy, TAP-format adaptation). They did **not** require releasing full baseline **source code**. This artifact therefore publishes prompts, schemas, and protocol specifications; it does not include the Home Assistant integration codebase.
+> **Scope:** This repository publishes benchmark data, offline scoring scripts, prompts, schemas, and protocol specifications. The Home Assistant integration and full baseline implementations are not included.
 
 **Related files in this repository:**
 
@@ -223,22 +223,16 @@ See [`CONSTRUCTION_PROTOCOL.md`](CONSTRUCTION_PROTOCOL.md) § Knowledge-Parity S
 
 ## 8. What This Artifact Includes vs. Excludes
 
-**Included (sufficient for fair-comparison audit):**
+**Included:**
 
 - Benchmark data, labels, and scoring scripts
 - Exact prompt templates and +DK knowledge block
 - Metadata schema example and home capability indices
 - Implementation protocol (this document)
 
-**Excluded (not required by reviewers; dynamic or codebase-specific):**
+**Not included:**
 
 - Home Assistant integration / baseline source code
 - Per-request LLM traces and token logs
 - Runtime `all_context` dumps (derived from the same schema as the example)
 - Request-specific KGIoT subgraph text and HomeGenii retrieved rule text
-
----
-
-## 9. Response to Reviewer Concern (Suggested Wording)
-
-> We have released exact implementation specifications for all compared methods in the artifact repository (`docs/IMPLEMENTATION_DETAILS.md` and `prompts/`). These documents provide the full prompt templates, shared metadata schema, LLM model (`gpt-4o`), temperature (0), retry policy (up to 6 attempts), evaluator/refinement behavior, single-turn user-interaction policy, and TAP-format adaptation for each baseline. A knowledge-parity (+DK) ablation injects plain-text domain rules equivalent to our general KG templates without providing graph structure or per-request oracle answers. The comparisons therefore isolate the effect of structured grounding and constrained planning rather than task mismatch, knowledge disadvantage, or under-tuned baselines.
